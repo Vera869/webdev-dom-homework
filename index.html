@@ -8,25 +8,25 @@
 
   <body>
     <div class="container">
-      <ul class="comments">
-        <li class="comment">
+      <ul id="comments" class="comments">
+        <li id="comm" class="comment">
           <div class="comment-header">
-            <div>Глеб Фокин</div>
-            <div>12.02.22 12:18</div>
+            <div id="comm-name" >Глеб Фокин</div>
+            <div value="" id="comm-date" >12.02.22 12:18</div>
           </div>
           <div class="comment-body">
-            <div class="comment-text">
+            <div id="comm-text" class="comment-text">
               Это будет первый комментарий на этой странице
             </div>
           </div>
           <div class="comment-footer">
             <div class="likes">
-              <span class="likes-counter">3</span>
+              <span value="" id="likes-count" class="likes-counter">3</span>
               <button class="like-button"></button>
             </div>
           </div>
         </li>
-        <li class="comment">
+        <li id="comm" class="comment">
           <div class="comment-header">
             <div>Варвара Н.</div>
             <div>13.02.22 19:22</div>
@@ -45,27 +45,77 @@
         </li>
       </ul>
       <div class="add-form">
-        <input
+        <input id="form-name"
           type="text"
           class="add-form-name"
           placeholder="Введите ваше имя"
+          value=""
         />
-        <textarea
+        <textarea id="form-text"
+          value=""
+          aria-valuetext=""
           type="textarea"
           class="add-form-text"
           placeholder="Введите ваш коментарий"
           rows="4"
         ></textarea>
         <div class="add-form-row">
-          <button class="add-form-button">Написать</button>
+          <button id="add-button" class="add-form-button">Написать</button>
         </div>
       </div>
     </div>
   </body>
 
   <script>
-    "use strict";
-    // Код писать здесь
-    console.log("It works!");
+     "use strict";
+    const buttonElement = document.getElementById('add-button');
+    const commNameElement = document.getElementById('comm-name');
+    const commElement = document.getElementById('comm');
+    const commTextElement = document.getElementById('comm-text');
+    const commlikeElement = document.getElementById('likes-count');
+    let commDateElement = document.getElementById('comm-date');
+    const commentsElement = document.getElementById('comments')
+    
+    const formNameElement = document.getElementById('form-name');
+    const formTextElement = document.getElementById('form-text');
+    commDateElement =>{
+      
+      const months = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
+      new Date();
+      let fullDate = `myDate.getDate() + "." + months[myDate.getMonth()] + "." + myDate.getFullYear()`;
+      return fullDate;
+    }
+    
+    buttonElement.addEventListener('click', () => {
+
+      if(formNameElement.value === "" || formTextElement.value === '') {
+        return;
+      }
+
+      const newComment = commentsElement.innerHTML;
+      commentsElement.innerHTML = 
+        newComment +
+        ` <li id="comm" class="comment">
+          <div class="comment-header">
+            <div id="name" >
+              ${formNameElement.value}
+            </div>
+            <div id="date" value="" >
+              ${commDateElement.innerHTML}
+              </div>
+          </div>
+          <div class="comment-body">
+            <div id="comm-text" class="comment-text">
+              ${formTextElement.value}
+            </div>
+          </div>
+          <div class="comment-footer">
+            <div class="likes">
+              <span value="" id="likes-count" class="likes-counter">0</span>
+              <button class="like-button"></button>
+            </div>
+          </div>
+        </li>`
+    });
   </script>
 </html>
