@@ -7,9 +7,10 @@
   </head>
 
   <body>
-    <div class="container">
-      <ul id="comments" class="comments">
-        <li id="comm" class="comment">
+    <div class="container" id="comment-box">
+      <!-- Список рендерится из JS -->
+       <ul id="comments" class="comments">
+        <!--<li id="comm" class="comment">
           <div class="comment-header">
             <div id="comm-name" >Глеб Фокин</div>
             <div value="" id="comm-date" >12.02.22 12:18</div>
@@ -42,7 +43,7 @@
               <button class="like-button -active-like"></button>
             </div>
           </div>
-        </li>
+        </li>-->
       </ul>
       <div class="add-form">
         <input id="form-name"
@@ -78,13 +79,66 @@
     
     const formNameElement = document.getElementById('form-name');
     const formTextElement = document.getElementById('form-text');
-    commDateElement =>{
+    
+    function newDateElement() {
       
-      const months = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
-      new Date();
-      let fullDate = `myDate.getDate() + "." + months[myDate.getMonth()] + "." + myDate.getFullYear()`;
+      let myDate = new Date();
+      let fullDate = myDate.getDate() + "." + myDate.getMonth() + "." + myDate.getFullYear();
       return fullDate;
     }
+    commDateElement = newDateElement();
+
+    const containersElements = document.querySelectorAll(".container");
+    const commentBoxElement = document.getElementById('comments');
+    
+    const containers = [
+      {
+        name: "Глеб Фокин",
+        date: "12.02.22 12:18",
+        text: "Это будет первый комментарий на этой странице",
+        countLike: 3,
+        isLike: false,
+      },
+      {
+        name: "Варвара Н.",
+        date: "13.02.22 19:22",
+        text: "Мне нравится как оформлена эта страница! ❤",
+        countLike: 75,
+        isLike: false,
+      },
+    ];
+
+    const rendercontainers = () => {
+      const containersHtml = containers.map((container) => {
+          return  ` <li id="comm" class="comment">
+             <div class="comment-header">
+               <div id="name" >
+                 ${container.name}
+               </div>
+               <div id="date" value="" >
+                 ${container.date}
+                 </div>
+             </div>
+             <div class="comment-body">
+               <div id="comm-text" class="comment-text">
+                 ${container.text}
+               </div>
+             </div>
+             <div class="comment-footer">
+               <div class="likes">
+                 <span id="likes-count" data-index="{index}" class="likes-counter">${container.countLike}</span>
+                 <button data-index="{index}" class="like-button"></button>
+               </div>
+             </div>
+           </li>`;
+        }).join("");
+        
+      commentBoxElement.innerHTML = containersHtml;
+      addLikeEventListeners();
+
+    }
+    rendercontainers();
+   
     
     buttonElement.addEventListener('click', () => {
 
@@ -92,30 +146,45 @@
         return;
       }
 
-      const newComment = commentsElement.innerHTML;
-      commentsElement.innerHTML = 
-        newComment +
-        ` <li id="comm" class="comment">
-          <div class="comment-header">
-            <div id="name" >
-              ${formNameElement.value}
-            </div>
-            <div id="date" value="" >
-              ${commDateElement.innerHTML}
-              </div>
-          </div>
-          <div class="comment-body">
-            <div id="comm-text" class="comment-text">
-              ${formTextElement.value}
-            </div>
-          </div>
-          <div class="comment-footer">
-            <div class="likes">
-              <span value="" id="likes-count" class="likes-counter">0</span>
-              <button class="like-button"></button>
-            </div>
-          </div>
-        </li>`
+      containers.push({
+        name: formNameElement.value,
+        date: commDateElement,
+        text: formTextElement.value,
+        countLike: 0,
+        isLike: false,
+      });
+      
+        rendercontainers();
+        formNameElement.value = "";
+        formTextElement.value = "";
     });
+
+    function addlike(index) {
+
+      const likebuttons = document.querySelectorAll('.like-button');
+      const likebutton = likebuttons[index];
+      const container = containers[index];
+      
+      if(!container.isLike) {
+        container.countLike += 1;
+        container.isLike = true;
+        rendercontainers();
+      } else {
+        container.countLike -= 1;
+        container.isLike = false;
+        rendercontainers();
+      }
+    } 
+    function addLikeEventListeners() {
+      const likebuttons = document.querySelectorAll('.like-button');
+      likebuttons.forEach((likebutton, index) => {
+        likebutton.addEventListener('click', () => {
+          addlike(index);
+        });
+      });
+
+    }
+    addLikeEventListeners();
+    rendercontainers();
   </script>
 </html>
