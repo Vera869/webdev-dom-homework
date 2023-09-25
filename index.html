@@ -80,10 +80,18 @@
     const formNameElement = document.getElementById('form-name');
     const formTextElement = document.getElementById('form-text');
     
+    const likeButtonElement = document.getElementById('like');
+
     function newDateElement() {
       
       let myDate = new Date();
-      let fullDate = myDate.getDate() + "." + myDate.getMonth() + "." + myDate.getFullYear();
+       
+      const day = String(myDate.getDate()).padStart(2, '0'); 
+      const month = String(myDate.getMonth() + 1) .padStart(2, '0');
+      const year = String(myDate.getFullYear()).slice(-2);
+      const hours = String(myDate.getHours()).padStart(2, '0');
+      const minutes = String(myDate.getMinutes()).padStart(2, '0');
+      let fullDate =`${day}.${month}.${year}  ${hours}:${minutes}`;
       return fullDate;
     }
     commDateElement = newDateElement();
@@ -127,7 +135,7 @@
              <div class="comment-footer">
                <div class="likes">
                  <span id="likes-count" data-index="{index}" class="likes-counter">${container.countLike}</span>
-                 <button data-index="{index}" class="like-button"></button>
+                 <button id="like" data-index="{index}" class="like-button ${container.isLike ? '-active-like' : ''}"></button>
                </div>
              </div>
            </li>`;
@@ -135,10 +143,9 @@
         
       commentBoxElement.innerHTML = containersHtml;
       addLikeEventListeners();
-
+       
     }
     rendercontainers();
-   
     
     buttonElement.addEventListener('click', () => {
 
@@ -147,9 +154,9 @@
       }
 
       containers.push({
-        name: formNameElement.value,
+        name: formNameElement.value.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("&", "&amp;").replaceAll('"', "&quot;"),
         date: commDateElement,
-        text: formTextElement.value,
+        text: formTextElement.value.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("&", "&amp;").replaceAll('"', "&quot;"),
         countLike: 0,
         isLike: false,
       });
@@ -160,7 +167,7 @@
     });
 
     function addlike(index) {
-
+      
       const likebuttons = document.querySelectorAll('.like-button');
       const likebutton = likebuttons[index];
       const container = containers[index];
@@ -168,12 +175,20 @@
       if(!container.isLike) {
         container.countLike += 1;
         container.isLike = true;
+        //likeButtonElement.classList.add('-active-like');
         rendercontainers();
       } else {
         container.countLike -= 1;
         container.isLike = false;
+        //likeButtonElement.classList.remove('-active-like');
         rendercontainers();
       }
+      //if(container.isLike === true){
+        //likeButtonElement.classList.add('-active-like');
+      //} else {
+       // likeButtonElement.classList.remove('-active-like');
+      //}
+        
     } 
     function addLikeEventListeners() {
       const likebuttons = document.querySelectorAll('.like-button');
