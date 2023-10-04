@@ -69,19 +69,12 @@
 
   <script>
      "use strict";
-    const buttonElement = document.getElementById('add-button');
-    const commNameElement = document.getElementById('comm-name');
-    const commElement = document.getElementById('comm');
-    const commTextElement = document.getElementById('comm-text');
-    const commlikeElement = document.getElementById('likes-count');
-    let commDateElement = document.getElementById('comm-date');
-    const commentsElement = document.getElementById('comments')
+    let commDateElement = document.querySelector('.date');
     
     const formNameElement = document.getElementById('form-name');
     const formTextElement = document.getElementById('form-text');
+    const buttonElement = document.querySelector('.add-form-button');
     
-    const likeButtonElement = document.getElementById('like');
-
     function newDateElement() {
       
       let myDate = new Date();
@@ -96,7 +89,6 @@
     }
     commDateElement = newDateElement();
 
-    const containersElements = document.querySelectorAll(".container");
     const commentBoxElement = document.getElementById('comments');
     
     const containers = [
@@ -118,24 +110,24 @@
 
     const rendercontainers = () => {
       const containersHtml = containers.map((container) => {
-          return  ` <li id="comm" class="comment">
+          return  ` <li class="comment">
              <div class="comment-header">
-               <div id="name" >
+               <div class="name" >
                  ${container.name}
                </div>
-               <div id="date" value="" >
+               <div class="date">
                  ${container.date}
                  </div>
              </div>
              <div class="comment-body">
-               <div id="comm-text" class="comment-text">
+               <div class="comment-text">
                  ${container.text}
                </div>
              </div>
              <div class="comment-footer">
                <div class="likes">
-                 <span id="likes-count" data-index="{index}" class="likes-counter">${container.countLike}</span>
-                 <button id="like" data-index="{index}" class="like-button ${container.isLike ? '-active-like' : ''}"></button>
+                 <span data-index="{index}" class="likes-counter">${container.countLike}</span>
+                 <button data-index="{index}" class="like-button ${container.isLike ? '-active-like' : ''}"></button>
                </div>
              </div>
            </li>`;
@@ -143,16 +135,15 @@
         
       commentBoxElement.innerHTML = containersHtml;
       addLikeEventListeners();
-       
+      answerComment()
     }
     rendercontainers();
     
     buttonElement.addEventListener('click', () => {
-
       if(formNameElement.value === "" || formTextElement.value === '') {
         return;
       }
-
+      
       containers.push({
         name: formNameElement.value.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("&", "&amp;").replaceAll('"', "&quot;"),
         date: commDateElement,
@@ -162,43 +153,50 @@
       });
       
         rendercontainers();
+
         formNameElement.value = "";
         formTextElement.value = "";
     });
 
-    function addlike(index) {
-      
+    function addlike(index) {  
       const likebuttons = document.querySelectorAll('.like-button');
       const likebutton = likebuttons[index];
       const container = containers[index];
       
       if(!container.isLike) {
         container.countLike += 1;
-        container.isLike = true;
-        //likeButtonElement.classList.add('-active-like');
+        container.isLike = true; 
         rendercontainers();
       } else {
         container.countLike -= 1;
         container.isLike = false;
-        //likeButtonElement.classList.remove('-active-like');
         rendercontainers();
       }
-      //if(container.isLike === true){
-        //likeButtonElement.classList.add('-active-like');
-      //} else {
-       // likeButtonElement.classList.remove('-active-like');
-      //}
-        
     } 
+
     function addLikeEventListeners() {
       const likebuttons = document.querySelectorAll('.like-button');
       likebuttons.forEach((likebutton, index) => {
-        likebutton.addEventListener('click', () => {
+        likebutton.addEventListener('click', (event) => {
+          event.stopPropagation();
           addlike(index);
         });
       });
-
     }
+
+    function answerComment() {
+      const commentsElement = document.querySelectorAll('.comment');
+      const commentName = document.querySelectorAll('.name');
+      const commentText = document.querySelectorAll('.comment-text');
+
+      commentsElement.forEach((commentBody, index) => {
+        commentBody.addEventListener('click', () => {
+          formTextElement.value = `${commentText[index].textContent}  ${commentName[index].textContent}`;
+        });
+      })
+      
+    };
+
     addLikeEventListeners();
     rendercontainers();
   </script>
