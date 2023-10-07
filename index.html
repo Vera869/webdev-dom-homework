@@ -112,7 +112,7 @@
       const containersHtml = containers.map((container) => {
           return  ` <li class="comment">
              <div class="comment-header">
-               <div class="name" >
+               <div class="name space" >
                  ${container.name}
                </div>
                <div class="date">
@@ -120,7 +120,7 @@
                  </div>
              </div>
              <div class="comment-body">
-               <div class="comment-text">
+               <div class="comment-text space">
                  ${container.text}
                </div>
              </div>
@@ -145,9 +145,17 @@
       }
       
       containers.push({
-        name: formNameElement.value.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("&", "&amp;").replaceAll('"', "&quot;"),
+        name: formNameElement.value
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;"),
         date: commDateElement,
-        text: formTextElement.value.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("&", "&amp;").replaceAll('"', "&quot;"),
+        text: formTextElement.value
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;"),
         countLike: 0,
         isLike: false,
       });
