@@ -90,8 +90,9 @@
     commDateElement = newDateElement();
 
     const commentBoxElement = document.getElementById('comments');
+    /*
     
-    const containers = [
+    const comments = [
       {
         name: "Глеб Фокин",
         date: "12.02.22 12:18",
@@ -107,44 +108,89 @@
         isLike: false,
       },
     ];
+      */
+    let comments = [];
 
-    const rendercontainers = () => {
-      const containersHtml = containers.map((container) => {
+    const getFetch = fetch("https://wedev-api.sky.pro/api/v1/vera-Bu/comments", {
+      method: "GET"
+    }).then((response) => {
+      const jsonPromise = response.json().then((responseData) => {
+        const appComments = responseData.comments.map((comment) => {
+          return {
+            //"id": 1,
+            name: comment.author.name,
+            date: newDateElement(comment.date),
+            text: comment.text,
+            countLike: comment.likes,
+            isliked: false,
+          };
+        })
+        comments = appComments;
+        rendercomments();
+      });
+    });
+
+    const rendercomments = () => {
+      const commentsHtml = comments.map((comment) => {
           return  ` <li class="comment">
              <div class="comment-header">
                <div class="name space" >
-                 ${container.name}
+                 ${comment.name}
                </div>
                <div class="date">
-                 ${container.date}
+                 ${comment.date}
                  </div>
              </div>
              <div class="comment-body">
                <div class="comment-text space">
-                 ${container.text}
+                 ${comment.text}
                </div>
              </div>
              <div class="comment-footer">
                <div class="likes">
-                 <span data-index="{index}" class="likes-counter">${container.countLike}</span>
-                 <button data-index="{index}" class="like-button ${container.isLike ? '-active-like' : ''}"></button>
+                 <span data-index="{index}" class="likes-counter">${comment.countLike}</span>
+                 <button data-index="{index}" class="like-button ${comment.isLike ? '-active-like' : ''}"></button>
                </div>
              </div>
            </li>`;
         }).join("");
         
-      commentBoxElement.innerHTML = containersHtml;
+      commentBoxElement.innerHTML = commentsHtml;
+      //getFetch();
+      //postFetch();
       addLikeEventListeners();
       answerComment()
     }
-    rendercontainers();
+    rendercomments();
     
+    const postFetch = () => fetch("https://wedev-api.sky.pro/api/v1/vera-Bu/comments", {
+        method: "POST",
+        body: JSON.stringify({
+          name: formNameElement.value,
+          text: formTextElement.value
+        })
+    }).then((response) => {
+        response.json().then((responseData) => {
+          
+          comments.push({
+           name: formNameElement.value,
+           data: new Date().toLocaleString().replace(",", ""),
+           text: formTextElement.value,
+           countLike: 0,
+           isLike: false,
+          })
+          
+          rendercomments();
+        });
+      });
+      
     buttonElement.addEventListener('click', () => {
       if(formNameElement.value === "" || formTextElement.value === '') {
         return;
       }
-      
-      containers.push({
+      postFetch();
+      /*
+      comments.push({
         name: formNameElement.value
           .replaceAll("&", "&amp;")
           .replaceAll("<", "&lt;")
@@ -159,8 +205,8 @@
         countLike: 0,
         isLike: false,
       });
-      
-        rendercontainers();
+       */
+        rendercomments();
 
         formNameElement.value = "";
         formTextElement.value = "";
@@ -169,16 +215,16 @@
     function addlike(index) {  
       const likebuttons = document.querySelectorAll('.like-button');
       const likebutton = likebuttons[index];
-      const container = containers[index];
+      const comment = comments[index];
       
-      if(!container.isLike) {
-        container.countLike += 1;
-        container.isLike = true; 
-        rendercontainers();
+      if(!comment.isLike) {
+        comment.countLike += 1;
+        comment.isLike = true; 
+        rendercomments();
       } else {
-        container.countLike -= 1;
-        container.isLike = false;
-        rendercontainers();
+        comment.countLike -= 1;
+        comment.isLike = false;
+        rendercomments();
       }
     } 
 
@@ -199,13 +245,14 @@
 
       commentsElement.forEach((commentBody, index) => {
         commentBody.addEventListener('click', () => {
-          formTextElement.value = `${commentText[index].textContent}  ${commentName[index].textContent}`;
+          formTextElement.value = `${commentText[index].textContent} 
+            ${commentName[index].textContent}`;
         });
       })
       
     };
 
     addLikeEventListeners();
-    rendercontainers();
+    rendercomments();
   </script>
 </html>
