@@ -111,24 +111,27 @@
       */
     let comments = [];
 
-    const getFetch = fetch("https://wedev-api.sky.pro/api/v1/vera-Bu/comments", {
-      method: "GET"
-    }).then((response) => {
-      const jsonPromise = response.json().then((responseData) => {
-        const appComments = responseData.comments.map((comment) => {
-          return {
-            //"id": 1,
-            name: comment.author.name,
-            date: newDateElement(comment.date),
-            text: comment.text,
-            countLike: comment.likes,
-            isliked: false,
-          };
-        })
-        comments = appComments;
-        rendercomments();
+    const getFetch = () => {
+      return fetch("https://wedev-api.sky.pro/api/v1/vera-Bu/comments", {
+        method: "GET"
+      }).then((response) => {
+        const jsonPromise = response.json().then((responseData) => {
+          const appComments = responseData.comments.map((comment) => {
+            return {
+              //"id": 1,
+              name: comment.author.name,
+              date: newDateElement(comment.date),
+              text: comment.text,
+              countLike: comment.likes,
+              isliked: false,
+            };
+          })
+          comments = appComments;
+          rendercomments();
+        });
       });
-    });
+    };
+    getFetch();
 
     const rendercomments = () => {
       const commentsHtml = comments.map((comment) => {
@@ -171,7 +174,8 @@
         })
     }).then((response) => {
         response.json().then((responseData) => {
-          
+          getFetch();
+          /*
           comments.push({
            name: formNameElement.value,
            data: new Date().toLocaleString().replace(",", ""),
@@ -179,7 +183,7 @@
            countLike: 0,
            isLike: false,
           })
-          
+          */
           rendercomments();
         });
       });
