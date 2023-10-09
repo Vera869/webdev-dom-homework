@@ -75,9 +75,9 @@
     const formTextElement = document.getElementById('form-text');
     const buttonElement = document.querySelector('.add-form-button');
     
-    function newDateElement() {
+    function newDateElement(date) {
       
-      let myDate = new Date();
+      let myDate = new Date(date);
        
       const day = String(myDate.getDate()).padStart(2, '0'); 
       const month = String(myDate.getMonth() + 1) .padStart(2, '0');
@@ -87,7 +87,7 @@
       let fullDate =`${day}.${month}.${year}  ${hours}:${minutes}`;
       return fullDate;
     }
-    commDateElement = newDateElement();
+    //commDateElement = newDateElement();
 
     const commentBoxElement = document.getElementById('comments');
     /*
@@ -112,6 +112,8 @@
     let comments = [];
 
     const getFetch = () => {
+
+      
       return fetch("https://wedev-api.sky.pro/api/v1/vera-Bu/comments", {
         method: "GET"
       }).then((response) => {
@@ -159,8 +161,6 @@
         }).join("");
         
       commentBoxElement.innerHTML = commentsHtml;
-      //getFetch();
-      //postFetch();
       addLikeEventListeners();
       answerComment()
     }
@@ -169,21 +169,20 @@
     const postFetch = () => fetch("https://wedev-api.sky.pro/api/v1/vera-Bu/comments", {
         method: "POST",
         body: JSON.stringify({
-          name: formNameElement.value,
+          name: formNameElement.value
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;"),
           text: formTextElement.value
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;"),
         })
     }).then((response) => {
         response.json().then((responseData) => {
           getFetch();
-          /*
-          comments.push({
-           name: formNameElement.value,
-           data: new Date().toLocaleString().replace(",", ""),
-           text: formTextElement.value,
-           countLike: 0,
-           isLike: false,
-          })
-          */
           rendercomments();
         });
       });
