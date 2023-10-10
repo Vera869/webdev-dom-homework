@@ -218,11 +218,11 @@
         commentLoader.style.display = "flex";
         addForm.style.display = "none";
       }).then((responseData) => {
-         getFetch();
+        return getFetch();
       }).then(() => {
         commentLoader.style.display = "none";
         addForm.style.display = "flex";
-         //rendercomments();
+        //rendercomments();
       });
 
     buttonElement.addEventListener('click', (event) => {

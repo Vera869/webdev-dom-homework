@@ -98,7 +98,6 @@ body {
     margin-top: 48px;
     display: flex;
     flex-direction: column;
-    display: block;
   }
   
   .add-form-name,
