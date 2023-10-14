@@ -214,23 +214,24 @@
         })
       }).then((response) => {
         return response.json()
-      }).then(() => {
-        commentLoader.style.display = "flex";
-        addForm.style.display = "none";
       }).then((responseData) => {
         return getFetch();
       }).then(() => {
         commentLoader.style.display = "none";
         addForm.style.display = "flex";
-        //rendercomments();
       });
 
     buttonElement.addEventListener('click', (event) => {
-      if(formNameElement.value === "" || formTextElement.value === '') {
+      if(formNameElement.value === "" || formTextElement.value === "" || formNameElement.value.trim() == "" || formTextElement.value.trim() == "") {
+        alert("Некорректно заполнены поля формы. Пожалуйста, исправьте и попробуйте снова.");
         return;
+      } else {
+        commentLoader.style.display = "flex";
+        addForm.style.display = "none";
       }
-      event.stopPropagation();
+      
       postFetch();
+      event.stopPropagation();
       rendercomments();
 
       formNameElement.value = "";
