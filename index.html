@@ -11,40 +11,6 @@
       <div class="start-loader">Пожалуйста, подождите - лента комментариев загружается...</div>
       <!-- Список рендерится из JS -->
        <ul id="comments" class="comments">
-        <!--<li id="comm" class="comment">
-          <div class="comment-header">
-            <div id="comm-name" >Глеб Фокин</div>
-            <div value="" id="comm-date" >12.02.22 12:18</div>
-          </div>
-          <div class="comment-body">
-            <div id="comm-text" class="comment-text">
-              Это будет первый комментарий на этой странице
-            </div>
-          </div>
-          <div class="comment-footer">
-            <div class="likes">
-              <span value="" id="likes-count" class="likes-counter">3</span>
-              <button class="like-button"></button>
-            </div>
-          </div>
-        </li>
-        <li id="comm" class="comment">
-          <div class="comment-header">
-            <div>Варвара Н.</div>
-            <div>13.02.22 19:22</div>
-          </div>
-          <div class="comment-body">
-            <div class="comment-text">
-              Мне нравится как оформлена эта страница! ❤
-            </div>
-          </div>
-          <div class="comment-footer">
-            <div class="likes">
-              <span class="likes-counter">75</span>
-              <button class="like-button -active-like"></button>
-            </div>
-          </div>
-        </li>-->
       </ul>
       <div class="comment-loader">Комментарий добавляется...</div>
       <div class="add-form">
@@ -90,62 +56,24 @@
     }
 
     const commentBoxElement = document.getElementById('comments');
-    /*
-    
-    const comments = [
-      {
-        name: "Глеб Фокин",
-        date: "12.02.22 12:18",
-        text: "Это будет первый комментарий на этой странице",
-        countLike: 3,
-        isLike: false,
-      },
-      {
-        name: "Варвара Н.",
-        date: "13.02.22 19:22",
-        text: "Мне нравится как оформлена эта страница! ❤",
-        countLike: 75,
-        isLike: false,
-      },
-    ];
-      */
-
+   
     const startLoader = document.querySelector(".start-loader");
     const commentLoader = document.querySelector(".comment-loader");
-    /*
-    const getFetch = () => {
-      return fetch("https://wedev-api.sky.pro/api/v1/vera-Bu/comments", {
-
-        method: "GET"
-      }).then((response) => {
-        return response.json()})
-        .then((responseData) => {
-          const appComments = responseData.comments.map((comment) => {
-            return {
-              //"id": 1,
-              name: comment.author.name,
-              date: newDateElement(comment.date),
-              text: comment.text,
-              countLike: comment.likes,
-              isliked: false,
-            };
-          })
-          comments = appComments;
-          rendercomments();
-        });
-      
-    };
-    getFetch();
-    */
-   //
+   
    let comments = [];
     startLoader.style.display = "flex";
     commentLoader.style.display = "none";
     const getFetch = () => {
-      return fetch("https://wedev-api.sky.pro/api/v1/vera-Bu/comments", {
+      return fetch("https://wedev-api.sky.pro/api/v1/vera-Buganova/comments", {
 
         method: "GET"
       }).then((response) => {
+        if(response.status === 500) {
+          throw new Error("Сервер сломался");
+        }
+        if(response.status === 400) {
+          throw new Error("Плохой запрос");
+        }
         return response.json()
       }).then((responseLoader) => {
           startLoader.style.display = "none";
@@ -153,7 +81,6 @@
       }).then((responseData) => {
           const appComments = responseData.comments.map((comment) => {
             return {
-              //"id": 1,
               name: comment.author.name,
               date: newDateElement(comment.date),
               text: comment.text,
@@ -163,6 +90,17 @@
           })
           comments = appComments;
           rendercomments()
+        }).catch((error) => {
+          if (error.message === "Сервер сломался") {
+            alert("Сервер сломался, попробуй позже");
+            return;
+          }
+          if (error.message === "Плохой запрос") {
+            alert("Имя и комментарий должны быть не короче 3 символов");
+            return
+          } else {
+            alert("Кажется, у вас сломался интернет, попробуйте позже");
+          }
         });
     };
     getFetch();
@@ -198,7 +136,7 @@
     }
     rendercomments();
     
-    const postFetch = () => fetch("https://wedev-api.sky.pro/api/v1/vera-Bu/comments", {
+    const postFetch = () => fetch("https://wedev-api.sky.pro/api/v1/vera-Buganova/comments", {
       method: "POST",
       body: JSON.stringify({
           name: formNameElement.value
@@ -211,14 +149,40 @@
           .replaceAll("<", "&lt;")
           .replaceAll(">", "&gt;")
           .replaceAll('"', "&quot;"),
+          forceError: true,
         })
       }).then((response) => {
+        if(response.status === 500) {
+          throw new Error("Сервер сломался");
+        }
+        if(response.status === 400) {
+          throw new Error("Плохой запрос");
+        }
         return response.json()
-      }).then((responseData) => {
-        return getFetch();
-      }).then(() => {
-        commentLoader.style.display = "none";
-        addForm.style.display = "flex";
+        }).then((responseData) => {
+          return getFetch();
+        }).then(() => {
+          commentLoader.style.display = "none";
+          addForm.style.display = "flex";
+          formNameElement.value = "";
+          formTextElement.value = "";
+      }).catch((error) => {
+          if (error.message === "Сервер сломался") {
+            commentLoader.style.display = "none";
+            addForm.style.display = "flex" ;
+            alert("Сервер сломался, попробуй позже");
+            return;
+          }
+          if (error.message === "Плохой запрос") {
+            commentLoader.style.display = "none";
+            addForm.style.display = "flex" ;
+            alert("Имя и комментарий должны быть не короче 3 символов");
+            return;
+          } else {
+            commentLoader.style.display = "none";
+            addForm.style.display = "flex" ;
+            alert("Кажется, у вас сломался интернет, попробуйте позже");
+          }
       });
 
     buttonElement.addEventListener('click', (event) => {
@@ -234,8 +198,6 @@
       event.stopPropagation();
       rendercomments();
 
-      formNameElement.value = "";
-      formTextElement.value = "";
     });
 
     function addlike(index) {  
