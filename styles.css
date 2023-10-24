@@ -98,9 +98,6 @@ body {
     display: flex;
     flex-direction: column;
   }
-  .authorizate-form {
-    margin-bottom: 48px;
-  }
   .add-authorizate-name,
   .add-authorizate-login,
   .authorizate-password {
