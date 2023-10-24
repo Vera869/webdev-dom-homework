@@ -1,17 +1,7 @@
-import { getFitchTodos } from "./modules/fitchTodos.js"
-import { postFetchTodo } from "./modules/fitchTodos.js"
-
-import { renderCommentInGet } from "./modules/renderTodos.js"
-import { commentsRender } from "./modules/renderTodos.js"
-
-import { errorProcessing } from "./modules/checkFitchTodos.js"
-import { errorProcessingPost } from "./modules/checkFitchTodos.js"
-import { checkButtonClick } from "./modules/checkFitchTodos.js"
-
-import { islikedComment } from "./modules/likesAndAnswer.js"
-import { likeClick } from "./modules/likesAndAnswer.js"
-import { renderAnswer } from "./modules/likesAndAnswer.js"
-
+import { getFitchTodos, postFetchTodo } from "./modules/fitchTodos.js"
+import { commentsRender, renderCommentInGet } from "./modules/renderTodos.js"
+import { errorProcessing, errorProcessingPost, checkButtonClick } from "./modules/checkFitchTodos.js"
+import { islikedComment, likeClick, renderAnswer } from "./modules/likesAndAnswer.js"
 import { newDateElement } from "./modules/other.js"
 
 const formNameElement = document.getElementById('form-name');
@@ -28,7 +18,6 @@ let comments = [];
 startLoader.style.display = "flex";
 commentLoader.style.display = "none";
 const getFetch = () => {
-  
    getFitchTodos()
   .then((responseLoader) => {
       startLoader.style.display = "none";
@@ -78,25 +67,21 @@ buttonElement.addEventListener('click', (event) => {
   rendercomments();
 
 });
-
 function addlike(index) {  
   const likebuttons = document.querySelectorAll('.like-button');
   const likebutton = likebuttons[index];
   const comment = comments[index];
   islikedComment({comment, rendercomments});
 } 
-
 function addLikeEventListeners() {
   const likebuttons = document.querySelectorAll('.like-button');
   likeClick({likebuttons, addlike});
 }
-
 function answerComment() {
   const commentsElement = document.querySelectorAll('.comment');
   const commentName = document.querySelectorAll('.name');
   const commentText = document.querySelectorAll('.comment-text');
   renderAnswer({commentsElement, formTextElement, commentText, commentName});
 };
-
 addLikeEventListeners();
 rendercomments();
