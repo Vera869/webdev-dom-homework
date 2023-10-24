@@ -1,17 +1,7 @@
-import { getFitchTodos } from "./modules/fitchTodos.js"
-import { postFetchTodo } from "./modules/fitchTodos.js"
-
-import { renderCommentInGet } from "./modules/renderTodos.js"
-import { commentsRender } from "./modules/renderTodos.js"
-
-import { errorProcessing } from "./modules/checkFitchTodos.js"
-import { errorProcessingPost } from "./modules/checkFitchTodos.js"
-import { checkButtonClick } from "./modules/checkFitchTodos.js"
-
-import { islikedComment } from "./modules/likesAndAnswer.js"
-import { likeClick } from "./modules/likesAndAnswer.js"
-import { renderAnswer } from "./modules/likesAndAnswer.js"
-
+import { getFitchTodos, postFetchTodo } from "./modules/fitchTodos.js"
+import { commentsRender, renderCommentInGet } from "./modules/renderTodos.js"
+import { errorProcessing, errorProcessingPost, checkButtonClick } from "./modules/checkFitchTodos.js"
+import { islikedComment, likeClick, renderAnswer } from "./modules/likesAndAnswer.js"
 import { newDateElement } from "./modules/other.js"
 
 const formNameElement = document.getElementById('form-name');
