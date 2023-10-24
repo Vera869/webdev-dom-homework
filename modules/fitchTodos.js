@@ -1,9 +1,5 @@
 import { checkGetFitch } from "./checkFitchTodos.js"
 import { checkPostFitch } from "./checkFitchTodos.js"
-//import { checkGetFitch } from "./checkFitchTodos.js"
-
-
-
 
 export function getFitchTodos() {
    return fetch("https://wedev-api.sky.pro/api/v1/vera-Bu/comments", {

@@ -17,7 +17,8 @@ export function likeClick({likebuttons, addlike}) {
       });
     });
 }
-export function renderAnswer({commentBody, commentsElement, formTextElement, commentText, commentName}) {
+export function renderAnswer({commentsElement, formTextElement, commentText, commentName}) {
+   const commentBody = document.querySelector('.comment-body');
    commentsElement.forEach((commentBody, index) => {
      commentBody.addEventListener('click', () => {
        formTextElement.value = `${commentText[index].textContent} 

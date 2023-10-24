@@ -1,7 +1,7 @@
 import { getFitchTodos } from "./modules/fitchTodos.js"
 import { postFetchTodo } from "./modules/fitchTodos.js"
 
-import { renderCommentInPost } from "./modules/renderTodos.js"
+import { renderCommentInGet } from "./modules/renderTodos.js"
 import { commentsRender } from "./modules/renderTodos.js"
 
 import { errorProcessing } from "./modules/checkFitchTodos.js"
@@ -14,7 +14,6 @@ import { renderAnswer } from "./modules/likesAndAnswer.js"
 
 import { newDateElement } from "./modules/other.js"
 
-//checkButtonClick({formNameElement, formTextElement, commentLoader, addForm})
 const formNameElement = document.getElementById('form-name');
 const formTextElement = document.getElementById('form-text');
 const buttonElement = document.querySelector('.add-form-button');
@@ -35,7 +34,7 @@ const getFetch = () => {
       startLoader.style.display = "none";
       return responseLoader;
   }).then((responseData) => {
-      //renderCommentInPost({responseData, comments, newDateElement});
+   //renderCommentInGet({responseData, comments, newDateElement, rendercomments})
      const appComments =  responseData.comments.map((comment) => {
       return {
         name: comment.author.name,
@@ -96,14 +95,7 @@ function answerComment() {
   const commentsElement = document.querySelectorAll('.comment');
   const commentName = document.querySelectorAll('.name');
   const commentText = document.querySelectorAll('.comment-text');
-
-  //renderAnswer({ commentBody, commentsElement, formTextElement, commentText, commentName});
-  commentsElement.forEach((commentBody, index) => {
-    commentBody.addEventListener('click', () => {
-      formTextElement.value = `${commentText[index].textContent} 
-        ${commentName[index].textContent}`;
-    });
-  })
+  renderAnswer({commentsElement, formTextElement, commentText, commentName});
 };
 
 addLikeEventListeners();

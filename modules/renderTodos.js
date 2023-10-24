@@ -1,4 +1,4 @@
-export function renderCommentInPost({responseData, comments, newDateElement}){
+export function renderCommentInGet({responseData, comments, newDateElement, rendercomments}){
    const appComments = 
    responseData.comments.map((comment) => {
       return {
@@ -10,6 +10,7 @@ export function renderCommentInPost({responseData, comments, newDateElement}){
       };
    })
    comments = appComments;
+   rendercomments()
 }
 export function commentsRender ({comments, commentBoxElement}) {
    const commentsHtml = comments.map((comment) => {
