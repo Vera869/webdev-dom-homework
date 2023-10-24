@@ -1,8 +1,14 @@
 import { checkGetFitch, checkPostFitch } from "./checkFitchTodos.js"
 
+const host = "https://wedev-api.sky.pro/api/v2/vera-Bu/comments";
+let token = "bgc0b8awbwas6g5g5k5o5s5w606g37w3cc3bo3b83k39s3co3c83c03ck";
+
 export function getFitchTodos() {
-   return fetch("https://wedev-api.sky.pro/api/v1/vera-Bug/comments", {
-   method: "GET"
+   return fetch(host, {
+   method: "GET",
+   headers: {
+      Authorization: token,
+   }
  }).then((response) => {
    checkGetFitch(response);
    return response.json();
@@ -10,8 +16,11 @@ export function getFitchTodos() {
 }
 
 export function postFetchTodo({formNameElement, formTextElement}) {
-   return fetch("https://wedev-api.sky.pro/api/v1/vera-Bug/comments", {
+   return fetch(host, {
    method: "POST",
+   headers: {
+      Authorization: token,
+   },
    body: JSON.stringify({
       name: formNameElement.value
       .replaceAll("&", "&amp;")

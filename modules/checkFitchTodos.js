@@ -11,6 +11,9 @@ export function checkGetFitch(response) {
 }
 
 export function checkPostFitch(response) {
+   if(response.status === 401) {
+      throw new Error("Нет авторизации");
+    }
    if(response.status === 500) {
       throw new Error("Сервер сломался");
     }
@@ -34,6 +37,12 @@ export function errorProcessing(error) {
        return}
 }
 export function errorProcessingPost({error, addForm, commentLoader}) {
+   if (error.message === "Нет авторизации") {
+      commentLoader.style.display = "none";
+      addForm.style.display = "flex" ;
+      alert("Пожалуйста, авторизируйтесь");
+      return;
+    }
    if (error.message === "Сервер сломался") {
       commentLoader.style.display = "none";
       addForm.style.display = "flex" ;
