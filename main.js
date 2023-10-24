@@ -21,29 +21,19 @@ let comments = [];
 const getFetch = () => {
    getFitchTodos()
   .then((responseLoader) => {
+   console.log(responseLoader);
       startLoader.style.display = "none";
       return responseLoader;
   }).then((responseData) => {
-   //renderCommentInGet({responseData, comments, newDateElement, rendercomments})
-     const appComments =  responseData.comments.map((comment) => {
-      return {
-        name: comment.author.name,
-        date: newDateElement(comment.date),
-        text: comment.text,
-        countLike: comment.likes,
-        isliked: false,
-      };
-   })
-      comments = appComments;
-      rendercomments()
+   renderCommentInGet({responseData, comments, newDateElement, rendercomments});
    }).catch((error) => {
       errorProcessing(error)
    });
 };
 getFetch();
 
-const rendercomments = () => {
-  commentsRender ({comments, commentBoxElement})
+const rendercomments = (appComments = []) => {
+  commentsRender ({comments: appComments, commentBoxElement})
   addLikeEventListeners();
   answerComment()
 }
