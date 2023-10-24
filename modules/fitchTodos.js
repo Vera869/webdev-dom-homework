@@ -1,7 +1,7 @@
 import { checkGetFitch, checkPostFitch } from "./checkFitchTodos.js"
 
 export function getFitchTodos() {
-   return fetch("https://wedev-api.sky.pro/api/v1/vera-Bu/comments", {
+   return fetch("https://wedev-api.sky.pro/api/v1/vera-Bug/comments", {
    method: "GET"
  }).then((response) => {
    checkGetFitch(response);
@@ -10,7 +10,7 @@ export function getFitchTodos() {
 }
 
 export function postFetchTodo({formNameElement, formTextElement}) {
-   return fetch("https://wedev-api.sky.pro/api/v1/vera-Bu/comments", {
+   return fetch("https://wedev-api.sky.pro/api/v1/vera-Bug/comments", {
    method: "POST",
    body: JSON.stringify({
       name: formNameElement.value

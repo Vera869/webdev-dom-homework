@@ -14,9 +14,10 @@ const commentBoxElement = document.getElementById('comments');
 const startLoader = document.querySelector(".start-loader");
 const commentLoader = document.querySelector(".comment-loader");
 
-let comments = [];
-startLoader.style.display = "flex";
+
 commentLoader.style.display = "none";
+startLoader.style.display = "flex";
+let comments = [];
 const getFetch = () => {
    getFitchTodos()
   .then((responseLoader) => {
