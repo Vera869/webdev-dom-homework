@@ -14,9 +14,8 @@ const commentBoxElement = document.getElementById('comments');
 const startLoader = document.querySelector(".start-loader");
 const commentLoader = document.querySelector(".comment-loader");
 
-
-commentLoader.style.display = "none";
 startLoader.style.display = "flex";
+addForm.style.display = "none";
 let comments = [];
 const getFetch = () => {
    getFitchTodos()
