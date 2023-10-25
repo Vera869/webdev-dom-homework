@@ -1,5 +1,4 @@
 export function renderCommentInGet({responseData, comments, newDateElement, rendercomments}){
-   console.log(responseData);
    const appComments = 
    responseData.comments.map((comment) => {
       return {
@@ -11,14 +10,10 @@ export function renderCommentInGet({responseData, comments, newDateElement, rend
       };
    })
    comments = appComments;
-   console.log(appComments);
-   console.log(comments);
    rendercomments(appComments)
 }
 export function commentsRender ({comments, commentBoxElement}) {
-   console.log(comments);
-  if(comments) {
-   const commentsHtml = comments.map((comment) => {
+  const commentsHtml = comments.map((comment) => {
       return  ` <li class="comment">
          <div class="comment-header">
            <div class="name space" >
@@ -42,6 +37,4 @@ export function commentsRender ({comments, commentBoxElement}) {
        </li>`;
    }).join("");
     commentBoxElement.innerHTML = commentsHtml;
-  }
-  
 }

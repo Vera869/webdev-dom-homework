@@ -1,6 +1,6 @@
 import { getFitchTodos, postFetchTodo } from "./modules/fitchTodos.js"
 import { commentsRender, renderCommentInGet } from "./modules/renderTodos.js"
-import { errorProcessing, errorProcessingPost, checkButtonClick } from "./modules/checkFitchTodos.js"
+import { errorProcessingGet, errorProcessingPost, checkButtonClick } from "./modules/checkFitchTodos.js"
 import { islikedComment, likeClick, renderAnswer } from "./modules/likesAndAnswer.js"
 import { newDateElement } from "./modules/other.js"
 
@@ -21,13 +21,12 @@ let comments = [];
 const getFetch = () => {
    getFitchTodos()
   .then((responseLoader) => {
-   console.log(responseLoader);
       startLoader.style.display = "none";
       return responseLoader;
   }).then((responseData) => {
    renderCommentInGet({responseData, comments, newDateElement, rendercomments});
    }).catch((error) => {
-      errorProcessing(error)
+      errorProcessingGet(error)
    });
 };
 getFetch();
@@ -49,7 +48,7 @@ const postFetch = () => {
       formNameElement.value = "";
       formTextElement.value = "";
    }).catch((error) => {
-      errorProcessingPost({error, addForm, commentLoader})
+      errorProcessingPost({error, addForm, commentLoader, getFetch})
     });
 }
 buttonElement.addEventListener('click', (event) => {
@@ -62,7 +61,7 @@ function addlike(index) {
   const likebuttons = document.querySelectorAll('.like-button');
   const likebutton = likebuttons[index];
   const comment = comments[index];
-  islikedComment({comment, rendercomments});
+  islikedComment({comment, islike, rendercomments});
 } 
 function addLikeEventListeners() {
   const likebuttons = document.querySelectorAll('.like-button');
