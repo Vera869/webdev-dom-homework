@@ -1,3 +1,9 @@
+export function renderFormAutoriz(){
+  
+}
+
+
+
 export function renderCommentInGet({responseData, comments, newDateElement, rendercomments}){
    const appComments = 
    responseData.comments.map((comment) => {
