@@ -62,7 +62,9 @@ const postFetch = () => {
       errorProcessingPost({error, addForm, commentLoader})
     });
 }
+console.log(buttonElement);
 buttonElement.addEventListener('click', (event) => {
+   console.log("click");
   checkButtonClick({formNameElement, formTextElement, commentLoader, addForm, postFetch});
   event.stopPropagation();
   rendercomments();
