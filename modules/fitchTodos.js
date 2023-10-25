@@ -17,6 +17,9 @@ export function getFitchTodos() {
 export function postFetchTodo({ formNameElement, formTextElement }) {
    return fetch(host, {
       method: "POST",
+      headers: {
+         Authorization: token,
+      },
       body: JSON.stringify({
          name: formNameElement.value
             .replaceAll("&", "&amp;")
@@ -28,9 +31,6 @@ export function postFetchTodo({ formNameElement, formTextElement }) {
             .replaceAll("<", "&lt;")
             .replaceAll(">", "&gt;")
             .replaceAll('"', "&quot;"),
-         headers: {
-            Authorization: token,
-         },
          //forceError: true,
       })
    }).then((response) => {
