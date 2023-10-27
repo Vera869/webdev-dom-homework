@@ -14,13 +14,23 @@ const commentBoxElement = document.getElementById('comments');
 const startLoader = document.querySelector(".start-loader");
 const commentLoader = document.querySelector(".comment-loader");
 
-startLoader.style.display = "flex";
-addForm.style.display = "none";
+const authorizForm = document.querySelector('.authorizate-form');
+const authorizbutton = document.querySelector('.authoriz-button');
+const AuthorizMassage = document.querySelector('.choice-form');
+const registrationForm = document.querySelector('.registration-form');
+const registrationbutton = document.querySelector('.add-authorizate-button');
+
+
+
+//startLoader.style.display = "flex";
+//addForm.style.display = "none";
+
 let comments = [];
 const getFetch = () => {
    getFitchTodos()
       .then((responseLoader) => {
-         startLoader.style.display = "none";
+        // startLoader.style.display = "none";
+        // AuthorizMassage.style.display = "flex";
          return responseLoader;
       }).then((responseData) => {
          renderCommentInGet({ responseData, comments, newDateElement, rendercomments });
@@ -31,11 +41,22 @@ const getFetch = () => {
 getFetch();
 
 const rendercomments = (appComments = []) => {
-   commentsRender({ comments: appComments, commentBoxElement })
+   commentsRender({ comments: appComments, commentBoxElement });
    addLikeEventListeners();
-   answerComment()
+   answerComment();
 }
 rendercomments();
+/*
+authorizbutton.addEventListener('click', ({event, token}) => {
+   if(!token) {
+      registrationForm.style.display = "flex";
+      registrationbutton.textContent = "Регистрация"
+      AuthorizMassage.style.display = "none";
+   }else {
+      authorizForm.style.display = "flex";
+   }
+   rendercomments();
+});*/
 
 const postFetch = () => {
    postFetchTodo({ formNameElement, formTextElement })
