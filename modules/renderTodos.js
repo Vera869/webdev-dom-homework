@@ -26,7 +26,9 @@ export function renderCommentInGet({responseData, comments, newDateElement, rend
    comments = appComments;
    rendercomments(appComments)
 }
-const commentForm = ` <div class="add-form addForm">
+
+export function commentsRender ({comments}) {
+  const commentForm = ` <div class="add-form addForm">
         <input id="form-name"
           type="text"
           class="add-form-name"
@@ -45,8 +47,6 @@ const commentForm = ` <div class="add-form addForm">
           <button id="add-button" class="add-form-button">Написать</button>
         </div>
         </div>`;
-
-export function commentsRender ({comments, commentForm}) {
   const app = document.getElementById("app");
   const commentsHtml = comments.map((comment) => {
       return  ` <li class="comment">
@@ -111,6 +111,8 @@ export function commentsRender ({comments, commentForm}) {
                     <br/><br/>
                     <div class="add-authorizate-form">
                       <button id="auth-button" class="add-authorizate-button">Войти</button>
+                      <br/><br/>
+                      <p class="link-form">Регистрация Click ? ${renderRegistrationForm} : "" </p>
                     </div>
                   </div>  `;
       }else {
@@ -148,7 +150,9 @@ export function commentsRender ({comments, commentForm}) {
             </div>
             <br/><br/>
             <div class="add-authorizate-form">
-              <button id="auth-button" class="add-authorizate-button">Войти</button>
+              <button id="auth-button" class="add-authorizate-button">Регистрация</button>
+              <br/><br/>
+              <p class="link-form">Войти </p>
             </div>
           </div>       
         </div> `;

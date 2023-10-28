@@ -49,18 +49,6 @@ const rendercomments = (appComments = []) => {
    answerComment();
 }
 rendercomments();
-/*
-authorizbutton.addEventListener('click', ({event, token}) => {
-   if(!token) {
-      registrationForm.style.display = "flex";
-      registrationbutton.textContent = "Регистрация"
-      AuthorizMassage.style.display = "none";
-   }else {
-      authorizForm.style.display = "flex";
-   }
-   rendercomments();
-});*/
-
 const postFetch = () => {
    postFetchTodo({ formNameElement, formTextElement })
       .then((responseData) => {
@@ -74,12 +62,12 @@ const postFetch = () => {
          errorProcessingPost({ error, addForm, commentLoader, getFetch })
       });
 }
-// buttonElement.addEventListener('click', (event) => {
-//    checkButtonClick({ formNameElement, formTextElement, commentLoader, addForm, postFetch });
-//    event.stopPropagation();
-//    rendercomments();
+buttonElement.addEventListener('click', (event) => {
+   checkButtonClick({ formNameElement, formTextElement, commentLoader, addForm, postFetch });
+   event.stopPropagation();
+   rendercomments();
 
-// });
+});
 function addlike(index) {
    const likebuttons = document.querySelectorAll('.like-button');
    const likebutton = likebuttons[index];
