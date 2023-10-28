@@ -69,7 +69,8 @@ export function commentsRender ({comments, commentBoxElement}) {
     <ul id="comments" class="comments">
       ${commentsHtml}
    </ul>
-    ${token ? commentForm : `<p class="button-authorizate"> Авторизуйтесь </p>`}
+    ${token ? commentForm : `<p class="choice-form addForm messages-form "> Чтобы добавить коментарий  
+    <span class="authoriz-button">Авторизуйтесь</span> </p>`}
    </div>`
     app.innerHTML = commentsConteinerHtml;
 }

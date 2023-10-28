@@ -70,13 +70,13 @@ const postFetch = () => {
       }).catch((error) => {
          errorProcessingPost({ error, addForm, commentLoader, getFetch })
       });
-}
-buttonElement.addEventListener('click', (event) => {
-   checkButtonClick({ formNameElement, formTextElement, commentLoader, addForm, postFetch });
-   event.stopPropagation();
-   rendercomments();
+ }
+// buttonElement.addEventListener('click', (event) => {
+//    checkButtonClick({ formNameElement, formTextElement, commentLoader, addForm, postFetch });
+//    event.stopPropagation();
+//    rendercomments();
 
-});
+// });
 function addlike(index) {
    const likebuttons = document.querySelectorAll('.like-button');
    const likebutton = likebuttons[index];
