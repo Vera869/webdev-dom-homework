@@ -1,9 +1,9 @@
-import {token} from "./fitchTodos.js"
+import { token } from "./fetchTodos.js"
 //import { goToAuthorizationButtonClick } from "./eventListeners.js"
 
-export function renderCommentInGet({responseData, comments, newDateElement, rendercomments}){
-   const appComments = 
-   responseData.comments.map((comment) => {
+export function renderCommentInGet({ responseData, comments, newDateElement, rendercomments }) {
+  const appComments =
+    responseData.comments.map((comment) => {
       return {
         // {
         //   "id": "64253950ca1ce2a815a327cf",
@@ -22,12 +22,12 @@ export function renderCommentInGet({responseData, comments, newDateElement, rend
         countLike: comment.likes,
         isliked: false,
       };
-   })
-   comments = appComments;
-   rendercomments(appComments)
+    })
+  comments = appComments;
+  rendercomments(appComments)
 }
 
-export function commentsRender ({comments}) {
+export function commentsRender({ comments }) {
   const commentForm = ` <div class="add-form addForm">
         <input id="form-name"
           type="text"
@@ -49,7 +49,7 @@ export function commentsRender ({comments}) {
         </div>`;
   const app = document.getElementById("app");
   const commentsHtml = comments.map((comment) => {
-      return  ` <li class="comment">
+    return ` <li class="comment">
          <div class="comment-header">
            <div class="name space" >
              ${comment.name}
@@ -70,8 +70,8 @@ export function commentsRender ({comments}) {
            </div>
          </div>
        </li>`;
-   }).join("");
-   const commentsConteinerHtml = `<div class="container" id="comment-box">
+  }).join("");
+  const commentsConteinerHtml = `<div class="container" id="comment-box">
         <div class="start-loader">Пожалуйста, подождите - лента комментариев загружается...</div>
         <div class="comment-loader" style="display: none;">Комментарий добавляется...</div>
         </div>
@@ -80,15 +80,15 @@ export function commentsRender ({comments}) {
         </ul>
           ${token ? commentForm : `<p class="choice-form addForm messages-Form""> Чтобы добавить коментарий <span class="button-authorizate"> Авторизуйтесь </span> </p>`}
         </div>`
-    app.innerHTML = commentsConteinerHtml;
-    
+  app.innerHTML = commentsConteinerHtml;
+
   const goToAuthorizationButtonClick = () => {
     const app = document.getElementById("app");
     const goToAuthorizationButton = document.querySelector(".button-authorizate")
-    goToAuthorizationButton.addEventListener('click', ({ renderRegistrationForm, renderAuthorizationForm, token}) => {
-      if(token) {
-          console.log("hello");
-          app.innerHTML = `<div class="authorizate-form">
+    goToAuthorizationButton.addEventListener('click', ({ renderRegistrationForm, renderAuthorizationForm, token }) => {
+      if (token) {
+        console.log("hello");
+        app.innerHTML = `<div class="authorizate-form">
                     <div class="loginForm">
                       Логин
                       <input id="auth-login"
@@ -115,9 +115,9 @@ export function commentsRender ({comments}) {
                       <p class="link-form">Регистрация Click ? ${renderRegistrationForm} : "" </p>
                     </div>
                   </div>  `;
-      }else {
-          console.log("hi");
-          app.innerHTML =  `<div class="registration-form addForm"">
+      } else {
+        console.log("hi");
+        app.innerHTML = `<div class="registration-form addForm"">
           <div class="nameForm">
           Имя
           <input id="auth-name"
@@ -159,7 +159,7 @@ export function commentsRender ({comments}) {
       }
     });
   }
-goToAuthorizationButtonClick();
+  goToAuthorizationButtonClick();
 }
 
 export function renderAuthorizationForm() {
@@ -189,11 +189,11 @@ export function renderAuthorizationForm() {
                       <button id="auth-button" class="add-authorizate-button">Войти</button>
                     </div>
                   </div>  `;
-} 
+}
 
 export function renderRegistrationForm() {
   const app = document.getElementById("app");
-  app.innerHTML =  `<div class="registration-form addForm" style="display: none;">
+  app.innerHTML = `<div class="registration-form addForm" style="display: none;">
                       <div class="nameForm">
                       Имя
                       <input id="auth-name"
