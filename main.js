@@ -42,26 +42,10 @@ getFetch();
 
 const rendercomments = (appComments = []) => {
    commentsRender({ comments: appComments, commentBoxElement });
-   goToAuthorizationButtonClick();
    addLikeEventListeners();
    answerComment();
 }
 rendercomments();
-
-function goToAuthorizationButtonClick() {
-   const goToAuthorizationButton = document.querySelector(".button-authorizate")
-   goToAuthorizationButton.addEventListener('click', ({ authorizForm, renderRegistrationForm, AuthorizMassage, registrationbutton, app, renderAuthorizationForm, rendercomments, token }) => {
-      if (token) {
-         console.log("hello");
-         app.innerHTML = renderAuthorizationForm;
-      } else {
-         console.log("hi");
-         app.innerHTML = renderRegistrationForm;
-
-      }
-      //rendercomments();
-   });
-}
 
 const postFetch = () => {
    postFetchTodo({ formNameElement, formTextElement })
@@ -76,11 +60,11 @@ const postFetch = () => {
          errorProcessingPost({ error, addForm, commentLoader, getFetch })
       });
 }
-// buttonElement.addEventListener('click', (event) => {
-//    checkButtonClick({ formNameElement, formTextElement, commentLoader, addForm, postFetch });
-//    event.stopPropagation();
-//    rendercomments();
-// });
+buttonElement.addEventListener('click', (event) => {
+   checkButtonClick({ formNameElement, formTextElement, commentLoader, addForm, postFetch });
+   event.stopPropagation();
+   rendercomments();
+});
 function addlike(index) {
    const likebuttons = document.querySelectorAll('.like-button');
    const likebutton = likebuttons[index];
