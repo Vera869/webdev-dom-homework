@@ -1,6 +1,83 @@
 import { token } from "./fetchTodos.js"
 //import { goToAuthorizationButtonClick } from "./eventListeners.js"
 
+
+// export function 
+const AuthorizationForm =
+// () {
+//   const app = document.getElementById("app");
+//   app.innerHTML = 
+ `<div class="authorizate-form">
+                    <div class="loginForm">
+                      Логин
+                      <input id="auth-login"
+                        type="text"
+                        class="authorizate-login"
+                        placeholder="Укажите логин"
+                        value=""
+                      />
+                    </div>
+                    <br/><br/>
+                    <div class="passwordForm">
+                      Пароль
+                      <input id="auth-password"
+                        type="password"
+                        class="authorizate-password"
+                        placeholder="Укажите пароль"
+                        value=""
+                      />
+                    </div>
+                    <br/><br/>
+                    <div class="add-authorizate-form">
+                      <button id="auth-button" class="add-authorizate-button">Войти</button>
+                    </div>
+                  </div>  `;
+//}
+
+//export function 
+const RegistrationForm =
+// () {
+//   const app = document.getElementById("app");
+//   app.innerHTML = 
+  `<div class="registration-form addForm" style="display: none;">
+                      <div class="nameForm">
+                      Имя
+                      <input id="auth-name"
+                        type="text"
+                        class="authorizate-name"
+                        placeholder="Укажите имя"
+                        value=""
+                        />
+                      </div>
+                      <br/><br/>
+                      <div class="authorizate-form">
+                        <div class="loginForm">
+                          Логин
+                          <input id="auth-login"
+                            type="text"
+                            class="authorizate-login"
+                            placeholder="Укажите логин"
+                            value=""
+                          />
+                        </div>
+                        <br/><br/>
+                        <div class="passwordForm">
+                          Пароль
+                          <input id="auth-password"
+                            type="password"
+                            class="authorizate-password"
+                            placeholder="Укажите пароль"
+                            value=""
+                          />
+                        </div>
+                        <br/><br/>
+                        <div class="add-authorizate-form">
+                          <button id="auth-button" class="add-authorizate-button">Войти</button>
+                        </div>
+                      </div>       
+                    </div> `;
+//}
+
 export function renderCommentInGet({ responseData, comments, newDateElement, rendercomments }) {
   const appComments =
     responseData.comments.map((comment) => {
@@ -82,10 +159,10 @@ export function commentsRender({ comments }) {
         </div>`
   app.innerHTML = commentsConteinerHtml;
 
-  const goToAuthorizationButtonClick = () => {
+  function goToAuthorizationButtonClick() {
     const app = document.getElementById("app");
     const goToAuthorizationButton = document.querySelector(".button-authorizate")
-    goToAuthorizationButton.addEventListener('click', ({ renderRegistrationForm, renderAuthorizationForm, token }) => {
+    goToAuthorizationButton.addEventListener('click', ({ RegistrationForm, AuthorizationForm, token }) => {
       if (token) {
         console.log("hello");
         app.innerHTML = `<div class="authorizate-form">
@@ -112,7 +189,7 @@ export function commentsRender({ comments }) {
                     <div class="add-authorizate-form">
                       <button id="auth-button" class="add-authorizate-button">Войти</button>
                       <br/><br/>
-                      <p class="link-form">Регистрация Click ? ${renderRegistrationForm} : "" </p>
+                      <p class="link-form">Регистрация</p>
                     </div>
                   </div>  `;
       } else {
@@ -152,7 +229,7 @@ export function commentsRender({ comments }) {
             <div class="add-authorizate-form">
               <button id="auth-button" class="add-authorizate-button">Регистрация</button>
               <br/><br/>
-              <p class="link-form">Войти </p>
+              <p class="link-form">Войти</p>
             </div>
           </div>       
         </div> `;
@@ -162,9 +239,12 @@ export function commentsRender({ comments }) {
   goToAuthorizationButtonClick();
 }
 
-export function renderAuthorizationForm() {
-  const app = document.getElementById("app");
-  app.innerHTML = `<div class="authorizate-form">
+// export function 
+const renderAuthorizationForm =
+// () {
+//   const app = document.getElementById("app");
+//   app.innerHTML = 
+`<div class="authorizate-form">
                     <div class="loginForm">
                       Логин
                       <input id="auth-login"
@@ -189,11 +269,14 @@ export function renderAuthorizationForm() {
                       <button id="auth-button" class="add-authorizate-button">Войти</button>
                     </div>
                   </div>  `;
-}
+//}
 
-export function renderRegistrationForm() {
-  const app = document.getElementById("app");
-  app.innerHTML = `<div class="registration-form addForm" style="display: none;">
+//export function 
+ const renderRegistrationForm =
+// () {
+//   const app = document.getElementById("app");
+//   app.innerHTML = 
+  `<div class="registration-form addForm" style="display: none;">
                       <div class="nameForm">
                       Имя
                       <input id="auth-name"
@@ -230,4 +313,4 @@ export function renderRegistrationForm() {
                         </div>
                       </div>       
                     </div> `;
-}
+//}
