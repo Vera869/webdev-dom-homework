@@ -99,7 +99,51 @@ const renderAuthorizationForm = () => {
   <br/><br/>
    <div class="add-authorizate-form">
      <button id="auth-button" class="add-authorizate-button">Войти</button>
+     <br/><br/>
+     <div> Регистрация </div>
    </div>
 </div>  `
 
 }
+const renderRegistrationForm = () => {
+  const app = document.getElementById("app");
+  app.innerHTML =`<div class="registration-form addForm" style="display: none;">
+              <div class="nameForm">
+              Имя
+              <input id="auth-name"
+                type="text"
+                class="authorizate-name"
+                placeholder="Укажите имя"
+                value=""
+                />
+              </div>
+              <br/><br/>
+              <div class="authorizate-form">
+                <div class="loginForm">
+                  Логин
+                  <input id="auth-login"
+                    type="text"
+                    class="authorizate-login"
+                    placeholder="Укажите логин"
+                    value=""
+                  />
+                </div>
+                <br/><br/>
+                <div class="passwordForm">
+                  Пароль
+                  <input id="auth-password"
+                    type="password"
+                    class="authorizate-password"
+                    placeholder="Укажите пароль"
+                    value=""
+                  />
+                </div>
+                <br/><br/>
+                <div class="add-authorizate-form">
+                  <button id="auth-button" class="add-authorizate-button">Регистрация</button>
+                  <br/><br/>
+                  <div> Войти </div>
+                </div>
+              </div>       
+            </div> `
+};
