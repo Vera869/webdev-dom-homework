@@ -3,6 +3,8 @@ import { commentsRender, renderCommentInGet } from "./modules/renderTodos.js"
 import { errorProcessingGet, errorProcessingPost, checkButtonClick } from "./modules/check.js"
 import { islikedComment, likeClick, renderAnswer } from "./modules/likesAndAnswer.js"
 import { newDateElement } from "./modules/other.js"
+//import { goToAuthorizationButtonClick } from "./modules/eventListeners.js"
+//import { renderRegistrationForm, renderAuthorizationForm} from "./modules/renderTodos.js"
 
 const formNameElement = document.getElementById('form-name');
 const formTextElement = document.getElementById('form-text');
@@ -42,6 +44,7 @@ getFetch();
 
 const rendercomments = (appComments = []) => {
    commentsRender({ comments: appComments, commentBoxElement });
+   goToAuthorizationButtonClick();
    addLikeEventListeners();
    answerComment();
 }
@@ -58,6 +61,25 @@ authorizbutton.addEventListener('click', ({event, token}) => {
    rendercomments();
 });*/
 
+function goToAuthorizationButtonClick() {
+   const goToAuthorizationButton = document.querySelector(".button-authorizate")
+   goToAuthorizationButton.addEventListener('click', ({ authorizForm, renderRegistrationForm, AuthorizMassage, registrationbutton, app, renderAuthorizationForm, rendercomments, token}) => {
+      if(token) {
+         console.log("hello");
+         app = renderAuthorizationForm;
+        // rendercomments();
+         //registrationForm.style.display = "flex";
+        // registrationbutton.textContent = "Регистрация"
+         //AuthorizMassage.style.display = "none";
+      }else {
+         console.log("hi");
+         app = renderRegistrationForm;
+        // rendercomments();
+         //authorizForm.style.display = "flex";
+      }
+      rendercomments();
+   });
+}
 const postFetch = () => {
    postFetchTodo({ formNameElement, formTextElement })
       .then((responseData) => {
@@ -71,12 +93,12 @@ const postFetch = () => {
          errorProcessingPost({ error, addForm, commentLoader, getFetch })
       });
 }
-buttonElement.addEventListener('click', (event) => {
-   checkButtonClick({ formNameElement, formTextElement, commentLoader, addForm, postFetch });
-   event.stopPropagation();
-   rendercomments();
+// buttonElement.addEventListener('click', (event) => {
+//    checkButtonClick({ formNameElement, formTextElement, commentLoader, addForm, postFetch });
+//    event.stopPropagation();
+//    rendercomments();
 
-});
+// });
 function addlike(index) {
    const likebuttons = document.querySelectorAll('.like-button');
    const likebutton = likebuttons[index];

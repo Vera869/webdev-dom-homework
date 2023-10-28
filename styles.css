@@ -98,9 +98,12 @@ body {
     display: flex;
     flex-direction: column;
   }
-  .messagesForm {
-    white-space: pre-line;
+  .messages-Form {
+    white-space: break-spaces;
     flex-direction: row;
+  }
+  .button-authorizate {
+    text-decoration: underline;
   }
   .authorizate-name,
   .authorizate-login,
