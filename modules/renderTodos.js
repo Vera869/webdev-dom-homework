@@ -1,11 +1,5 @@
 import { token } from "./fetchTodos.js"
 
-
-export function renderFormAutoriz() {
-
-}
-
-
 export function renderCommentInGet({ responseData, comments, newDateElement, rendercomments }) {
   const appComments =
     responseData.comments.map((comment) => {
@@ -20,7 +14,7 @@ export function renderCommentInGet({ responseData, comments, newDateElement, ren
   comments = appComments;
   rendercomments(appComments)
 }
-export function commentsRender({ comments, }) {
+export function renderCommentsAndForms({ comments, }) {
   const app = document.getElementById("app");
   const commentForm = ` <div class="add-form addForm">
       <input id="form-name"
@@ -73,7 +67,6 @@ export function commentsRender({ comments, }) {
     <span class="button-authorizate">авторизуйтесь</span> </p>`}
    </div>`
   app.innerHTML = commentsConteinerHtml;
-   //
    function goToAuthorizationButtonClick() {
     const app = document.getElementById("app");
     const goToAuthorizationButton = document.querySelector(".button-authorizate")
@@ -153,81 +146,3 @@ export function commentsRender({ comments, }) {
   }
   goToAuthorizationButtonClick();
 }
-
-const renderAuthorizationForm =
-  // () => {
-  //   const app = document.getElementById("app");
-  //   app.innerHTML = 
-  `<div class="authorizate-form">
-  <div class="loginForm">
-    Логин
-     <input id="auth-login"
-       type="text"
-       class="authorizate-login"
-       placeholder="Укажите логин"
-       value=""
-     />
-  </div>
-  <br/><br/>
-  <div class="passwordForm">
-    Пароль
-     <input id="auth-password"
-       type="password"
-       class="authorizate-password"
-       placeholder="Укажите пароль"
-       value=""
-     />
-  </div>
-  <br/><br/>
-   <div class="add-authorizate-form">
-     <button id="auth-button" class="add-authorizate-button">Войти</button>
-     <br/><br/>
-     <div> Регистрация </div>
-   </div>
-</div>  `
-
-//}
-const renderRegistrationForm =
-  //  () => {
-  //   const app = document.getElementById("app");
-  //   app.innerHTML =
-  `<div class="registration-form addForm" style="display: none;">
-              <div class="nameForm">
-              Имя
-              <input id="auth-name"
-                type="text"
-                class="authorizate-name"
-                placeholder="Укажите имя"
-                value=""
-                />
-              </div>
-              <br/><br/>
-              <div class="authorizate-form">
-                <div class="loginForm">
-                  Логин
-                  <input id="auth-login"
-                    type="text"
-                    class="authorizate-login"
-                    placeholder="Укажите логин"
-                    value=""
-                  />
-                </div>
-                <br/><br/>
-                <div class="passwordForm">
-                  Пароль
-                  <input id="auth-password"
-                    type="password"
-                    class="authorizate-password"
-                    placeholder="Укажите пароль"
-                    value=""
-                  />
-                </div>
-                <br/><br/>
-                <div class="add-authorizate-form">
-                  <button id="auth-button" class="add-authorizate-button">Регистрация</button>
-                  <br/><br/>
-                  <div> Войти </div>
-                </div>
-              </div>       
-            </div> `
-//};

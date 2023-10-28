@@ -1,5 +1,5 @@
 import { getFitchTodos, postFetchTodo, registrationApi, authorizationApi } from "./modules/fetchTodos.js"
-import { commentsRender, renderCommentInGet } from "./modules/renderTodos.js"
+import { renderCommentsAndForms, renderCommentInGet } from "./modules/renderTodos.js"
 import { errorProcessingGet, errorProcessingPost, checkButtonClick } from "./modules/check.js"
 import { islikedComment, likeClick, renderAnswer } from "./modules/likesAndAnswer.js"
 import { newDateElement } from "./modules/other.js"
@@ -20,17 +20,10 @@ const AuthorizMassage = document.querySelector('.choice-form');
 const registrationForm = document.querySelector('.registration-form');
 const registrationbutton = document.querySelector('.add-authorizate-button');
 
-
-
-//startLoader.style.display = "flex";
-//addForm.style.display = "none";
-
 let comments = [];
 const getFetch = () => {
    getFitchTodos()
       .then((responseLoader) => {
-         // startLoader.style.display = "none";
-         // AuthorizMassage.style.display = "flex";
          return responseLoader;
       }).then((responseData) => {
          renderCommentInGet({ responseData, comments, newDateElement, rendercomments });
@@ -41,7 +34,7 @@ const getFetch = () => {
 getFetch();
 
 const rendercomments = (appComments = []) => {
-   commentsRender({ comments: appComments, commentBoxElement });
+   renderCommentsAndForms({ comments: appComments, commentBoxElement });
    addLikeEventListeners();
    answerComment();
 }

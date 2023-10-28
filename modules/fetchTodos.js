@@ -43,7 +43,23 @@ export function postFetchTodo({ formNameElement, formTextElement }) {
       return response.json()
    })
 }
-
+export function getUserApi() {
+   return fetch("https://wedev-api.sky.pro/api/user", {
+      method: "GET",
+      headers: {
+         Authorization: token,
+      },
+   }).then((response) => {
+      checkFitch(response);
+      return response.json();
+   }).then((response) => {
+      console.log(response);
+      setToken(response.token);
+      console.log(response);
+   }).catch((error) => {
+      errorProcessingGet(error);
+   });
+}
 
 export function authorizationApi({login, password }) {
    return fetch("https://wedev-api.sky.pro/api/user/login", {
@@ -62,7 +78,9 @@ export function authorizationApi({login, password }) {
       console.log(response);
       setToken(response.token);
       console.log(response);
-   })
+   }).catch((error) => {
+      errorProcessingPost({ error, addForm, commentLoader, getFetch })
+   });
 }
 
 export function registrationApi({name, login, password }) {
@@ -83,5 +101,7 @@ export function registrationApi({name, login, password }) {
       console.log(response);
       setToken(response.token);
       console.log(response);
-   })
+   }).catch((error) => {
+      errorProcessingPost({ error, addForm, commentLoader, getFetch })
+   });
 }
