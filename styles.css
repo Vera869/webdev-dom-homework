@@ -98,6 +98,11 @@ body {
     display: flex;
     flex-direction: column;
   }
+  .add-authorizate-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   .messages-Form {
     white-space: break-spaces;
     flex-direction: row;
