@@ -20,7 +20,7 @@ export function renderCommentInGet({responseData, comments, newDateElement, rend
    comments = appComments;
    rendercomments(appComments)
 }
-export function commentsRender ({comments, commentBoxElement}) {
+export function commentsRender ({comments,}) {
   const app = document.getElementById("app");
   const commentForm = ` <div class="add-form addForm">
       <input id="form-name"
@@ -69,14 +69,18 @@ export function commentsRender ({comments, commentBoxElement}) {
     <ul id="comments" class="comments">
       ${commentsHtml}
    </ul>
-    ${token ? commentForm : `<p class="choice-form addForm messages-form "> Чтобы добавить коментарий  
-    <span class="authoriz-button">Авторизуйтесь</span> </p>`}
+    ${token ? commentForm : `<p class="choice-form addForm messages-form "> Чтобы добавить коментарий
+    <span class="authoriz-button">авторизуйтесь</span> </p>`}
    </div>`
     app.innerHTML = commentsConteinerHtml;
+    
 }
-const renderAuthorizationForm = () => {
-  const app = document.getElementById("app");
-  app.innerHTML = `<div class="authorizate-form">
+
+const renderAuthorizationForm = 
+// () => {
+//   const app = document.getElementById("app");
+//   app.innerHTML = 
+  `<div class="authorizate-form">
   <div class="loginForm">
     Логин
      <input id="auth-login"
@@ -104,10 +108,12 @@ const renderAuthorizationForm = () => {
    </div>
 </div>  `
 
-}
-const renderRegistrationForm = () => {
-  const app = document.getElementById("app");
-  app.innerHTML =`<div class="registration-form addForm" style="display: none;">
+//}
+const renderRegistrationForm =
+//  () => {
+//   const app = document.getElementById("app");
+//   app.innerHTML =
+  `<div class="registration-form addForm" style="display: none;">
               <div class="nameForm">
               Имя
               <input id="auth-name"
@@ -146,4 +152,4 @@ const renderRegistrationForm = () => {
                 </div>
               </div>       
             </div> `
-};
+//};

@@ -15,7 +15,7 @@ const startLoader = document.querySelector(".start-loader");
 const commentLoader = document.querySelector(".comment-loader");
 
 const authorizForm = document.querySelector('.authorizate-form');
-const authorizbutton = document.querySelector('.authoriz-button');
+const goToAuthorizationButton = document.querySelector('.authoriz-button');
 const AuthorizMassage = document.querySelector('.choice-form');
 const registrationForm = document.querySelector('.registration-form');
 const registrationbutton = document.querySelector('.add-authorizate-button');
@@ -42,21 +42,26 @@ getFetch();
 
 const rendercomments = (appComments = []) => {
    commentsRender({ comments: appComments, commentBoxElement });
+   goToAuthorizationButtonClick();
    addLikeEventListeners();
    answerComment();
 }
 rendercomments();
-/*
-authorizbutton.addEventListener('click', ({event, token}) => {
-   if(!token) {
-      registrationForm.style.display = "flex";
-      registrationbutton.textContent = "Регистрация"
-      AuthorizMassage.style.display = "none";
-   }else {
-      authorizForm.style.display = "flex";
-   }
-   rendercomments();
-});*/
+
+function goToAuthorizationButtonClick() {
+   const goToAuthorizationButton = document.querySelector(".button-authorizate")
+   goToAuthorizationButton.addEventListener('click', ({ authorizForm, renderRegistrationForm, AuthorizMassage, registrationbutton, app, renderAuthorizationForm, rendercomments, token}) => {
+      if(token) {
+         console.log("hello");
+         app.innerHTML = renderAuthorizationForm;
+      }else {
+         console.log("hi");
+         app.innerHTML = renderRegistrationForm;
+        
+      }
+      //rendercomments();
+   });
+ }
 
 const postFetch = () => {
    postFetchTodo({ formNameElement, formTextElement })
@@ -75,7 +80,6 @@ const postFetch = () => {
 //    checkButtonClick({ formNameElement, formTextElement, commentLoader, addForm, postFetch });
 //    event.stopPropagation();
 //    rendercomments();
-
 // });
 function addlike(index) {
    const likebuttons = document.querySelectorAll('.like-button');
