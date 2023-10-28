@@ -1,4 +1,4 @@
-import { getFitchTodos, postFetchTodo } from "./modules/fitchTodos.js"
+import { getFitchTodos, postFetchTodo, registrationApi, authorizationApi } from "./modules/fetchTodos.js"
 import { commentsRender, renderCommentInGet } from "./modules/renderTodos.js"
 import { errorProcessingGet, errorProcessingPost, checkButtonClick } from "./modules/check.js"
 import { islikedComment, likeClick, renderAnswer } from "./modules/likesAndAnswer.js"
@@ -29,8 +29,8 @@ let comments = [];
 const getFetch = () => {
    getFitchTodos()
       .then((responseLoader) => {
-        // startLoader.style.display = "none";
-        // AuthorizMassage.style.display = "flex";
+         // startLoader.style.display = "none";
+         // AuthorizMassage.style.display = "flex";
          return responseLoader;
       }).then((responseData) => {
          renderCommentInGet({ responseData, comments, newDateElement, rendercomments });
@@ -50,18 +50,18 @@ rendercomments();
 
 function goToAuthorizationButtonClick() {
    const goToAuthorizationButton = document.querySelector(".button-authorizate")
-   goToAuthorizationButton.addEventListener('click', ({ authorizForm, renderRegistrationForm, AuthorizMassage, registrationbutton, app, renderAuthorizationForm, rendercomments, token}) => {
-      if(token) {
+   goToAuthorizationButton.addEventListener('click', ({ authorizForm, renderRegistrationForm, AuthorizMassage, registrationbutton, app, renderAuthorizationForm, rendercomments, token }) => {
+      if (token) {
          console.log("hello");
          app.innerHTML = renderAuthorizationForm;
-      }else {
+      } else {
          console.log("hi");
          app.innerHTML = renderRegistrationForm;
-        
+
       }
       //rendercomments();
    });
- }
+}
 
 const postFetch = () => {
    postFetchTodo({ formNameElement, formTextElement })
@@ -75,7 +75,7 @@ const postFetch = () => {
       }).catch((error) => {
          errorProcessingPost({ error, addForm, commentLoader, getFetch })
       });
- }
+}
 // buttonElement.addEventListener('click', (event) => {
 //    checkButtonClick({ formNameElement, formTextElement, commentLoader, addForm, postFetch });
 //    event.stopPropagation();

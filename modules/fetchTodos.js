@@ -64,3 +64,24 @@ export function authorizationApi({login, password }) {
       console.log(response);
    })
 }
+
+export function registrationApi({name, login, password }) {
+   return fetch("https://wedev-api.sky.pro/api/user", {
+      method: "POST",
+      headers: {
+         Authorization: token,
+      },
+      body: JSON.stringify({
+         login,
+         name,
+         password,
+       })
+   }).then((response) => {
+      checkFitch(response)
+      return response.json()
+   }).then((response) => {
+      console.log(response);
+      setToken(response.token);
+      console.log(response);
+   })
+}

@@ -1,14 +1,14 @@
-import {token} from "./fitchTodos.js"
+import { token } from "./fetchTodos.js"
 
 
-export function renderFormAutoriz(){
+export function renderFormAutoriz() {
 
 }
 
 
-export function renderCommentInGet({responseData, comments, newDateElement, rendercomments}){
-   const appComments = 
-   responseData.comments.map((comment) => {
+export function renderCommentInGet({ responseData, comments, newDateElement, rendercomments }) {
+  const appComments =
+    responseData.comments.map((comment) => {
       return {
         name: comment.author.name,
         date: newDateElement(comment.date),
@@ -16,11 +16,11 @@ export function renderCommentInGet({responseData, comments, newDateElement, rend
         countLike: comment.likes,
         isliked: false,
       };
-   })
-   comments = appComments;
-   rendercomments(appComments)
+    })
+  comments = appComments;
+  rendercomments(appComments)
 }
-export function commentsRender ({comments,}) {
+export function commentsRender({ comments, }) {
   const app = document.getElementById("app");
   const commentForm = ` <div class="add-form addForm">
       <input id="form-name"
@@ -42,7 +42,7 @@ export function commentsRender ({comments,}) {
       </div>
     </div>`
   const commentsHtml = comments.map((comment) => {
-      return  ` <li class="comment">
+    return ` <li class="comment">
          <div class="comment-header">
            <div class="name space" >
              ${comment.name}
@@ -63,8 +63,8 @@ export function commentsRender ({comments,}) {
            </div>
          </div>
        </li>`;
-   }).join("");
-   const commentsConteinerHtml = `<div class="container" id="comment-box">
+  }).join("");
+  const commentsConteinerHtml = `<div class="container" id="comment-box">
    <div class="start-loader">Пожалуйста, подождите - лента комментариев загружается...</div>
     <ul id="comments" class="comments">
       ${commentsHtml}
@@ -72,14 +72,14 @@ export function commentsRender ({comments,}) {
     ${token ? commentForm : `<p class="choice-form addForm messages-form "> Чтобы добавить коментарий
     <span class="authoriz-button">авторизуйтесь</span> </p>`}
    </div>`
-    app.innerHTML = commentsConteinerHtml;
-    
+  app.innerHTML = commentsConteinerHtml;
+
 }
 
-const renderAuthorizationForm = 
-// () => {
-//   const app = document.getElementById("app");
-//   app.innerHTML = 
+const renderAuthorizationForm =
+  // () => {
+  //   const app = document.getElementById("app");
+  //   app.innerHTML = 
   `<div class="authorizate-form">
   <div class="loginForm">
     Логин
@@ -110,9 +110,9 @@ const renderAuthorizationForm =
 
 //}
 const renderRegistrationForm =
-//  () => {
-//   const app = document.getElementById("app");
-//   app.innerHTML =
+  //  () => {
+  //   const app = document.getElementById("app");
+  //   app.innerHTML =
   `<div class="registration-form addForm" style="display: none;">
               <div class="nameForm">
               Имя
