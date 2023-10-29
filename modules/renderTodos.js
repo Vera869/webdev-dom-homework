@@ -1,5 +1,4 @@
 import { token } from "./fetchTodos.js"
-import {goToAuthorizationButtonClick} from "./other.js"
 
 export function renderCommentInGet({ responseData, comments, newDateElement, rendercomments }) {
   const appComments =
@@ -40,7 +39,7 @@ export const authorizationForm = `<div class="authorizate-form">
                             <div class="add-authorizate-form">
                               <button id="auth-button" class="add-authorizate-button">Войти</button>
                               <br/><br/>
-                              <p class="link-form">Регистрация</p>
+                             <!-- <p class="link-form regist">Регистрация</p>-->
                             </div>
                             </div>  `;
 export const registrationForm = `<div class="registration-form addForm"">
@@ -78,7 +77,7 @@ export const registrationForm = `<div class="registration-form addForm"">
                               <div class="add-authorizate-form">
                                 <button id="auth-button" class="add-authorizate-button">Регистрация</button>
                                 <br/><br/>
-                                <p class="link-form">Войти</p>
+                                <!-- <p class="link-form entrance">Войти</p>-->
                               </div>
                             </div>       
                             </div> `;
@@ -135,6 +134,23 @@ export function renderCommentsAndForms({ comments }) {
     <span class="button-authorizate">авторизуйтесь</span> </p>`}
    </div>`
   app.innerHTML = commentsConteinerHtml;
-  
-  goToAuthorizationButtonClick();
-}
+    document.querySelector(".button-authorizate").addEventListener('click', ({ token}) => {
+      if (token) {
+        console.log("hello");
+        app.innerHTML = authorizationForm;
+      } else {
+        console.log("hi");
+        app.innerHTML = registrationForm;
+      }
+    });
+    document.querySelector(".add-authorizate-button").addEventListener('click', () => {
+      console.log("reg");
+      app.innerHTML = authorizationForm;
+      }
+    );
+    // document.querySelector(".regist").addEventListener('click', (event) => {
+    //   event.stopPropagation();  
+    //   app.innerHTML = registrationForm;
+    //   }
+    // );
+  }

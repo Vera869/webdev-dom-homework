@@ -1,6 +1,6 @@
-import { getFitchTodos, postFetchTodo, registrationApi, authorizationApi } from "./modules/fetchTodos.js"
+import { getFitchTodos, postFetchTodo, getUserApi,  authorizationApi } from "./modules/fetchTodos.js"
 import { renderCommentsAndForms, renderCommentInGet } from "./modules/renderTodos.js"
-import { errorProcessingGet, errorProcessingPost, checkButtonClick } from "./modules/check.js"
+import { errorProcessingGet, errorProcessingPost } from "./modules/check.js"
 import { islikedComment, likeClick, renderAnswer } from "./modules/likesAndAnswer.js"
 import { newDateElement } from "./modules/other.js"
 
@@ -33,11 +33,14 @@ getFetch();
 
 const rendercomments = (appComments = []) => {
    renderCommentsAndForms({ comments: appComments, commentBoxElement });
+   // getUserApi();
+   // authorizationApi();
+   // registrationApi();
    addLikeEventListeners();
    answerComment();
 }
 rendercomments();
-
+buttonPoctComment()
 const postFetch = () => {
    postFetchTodo({ formNameElement, formTextElement })
       .then((responseData) => {
@@ -51,11 +54,13 @@ const postFetch = () => {
          errorProcessingPost({ error, addForm, commentLoader, getFetch })
       });
 }
-buttonElement.addEventListener('click', (event) => {
-   checkButtonClick({ formNameElement, formTextElement, commentLoader, addForm, postFetch });
-   event.stopPropagation();
-   rendercomments();
-});
+function buttonPoctComment() {
+   buttonElement.addEventListener('click', (event) => {
+      checkButtonClick({ formNameElement, formTextElement, commentLoader, addForm, postFetch });
+      event.stopPropagation();
+      rendercomments();
+   });
+}
 function addlike(index) {
    const likebuttons = document.querySelectorAll('.like-button');
    const likebutton = likebuttons[index];
