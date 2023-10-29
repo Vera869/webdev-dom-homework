@@ -103,7 +103,15 @@ body {
     white-space: pre-line;
     flex-direction: row;
   }
-  .authoriz-button {
+  .button-authorizate {
+    text-decoration: underline;
+  }
+  .add-authorizate-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .link-form {
     text-decoration: underline;
   }
   .authorizate-name,

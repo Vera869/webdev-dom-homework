@@ -14,7 +14,7 @@ export function renderCommentInGet({ responseData, comments, newDateElement, ren
   comments = appComments;
   rendercomments(appComments)
 }
-export function renderCommentsAndForms({ comments, }) {
+export function renderCommentsAndForms({ comments }) {
   const app = document.getElementById("app");
   const commentForm = ` <div class="add-form addForm">
       <input id="form-name"
