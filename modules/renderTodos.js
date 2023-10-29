@@ -1,4 +1,5 @@
 import { token } from "./fetchTodos.js"
+import {goToAuthorizationButtonClick} from "./other.js"
 
 export function renderCommentInGet({ responseData, comments, newDateElement, rendercomments }) {
   const appComments =
@@ -14,6 +15,73 @@ export function renderCommentInGet({ responseData, comments, newDateElement, ren
   comments = appComments;
   rendercomments(appComments)
 }
+
+export const authorizationForm = `<div class="authorizate-form">
+                            <div class="loginForm">
+                              Логин
+                              <input id="auth-login"
+                                type="text"
+                                class="authorizate-login"
+                                placeholder="Укажите логин"
+                                value=""
+                              />
+                            </div>
+                            <br/><br/>
+                            <div class="passwordForm">
+                              Пароль
+                              <input id="auth-password"
+                                type="password"
+                                class="authorizate-password"
+                                placeholder="Укажите пароль"
+                                value=""
+                              />
+                            </div>
+                            <br/><br/>
+                            <div class="add-authorizate-form">
+                              <button id="auth-button" class="add-authorizate-button">Войти</button>
+                              <br/><br/>
+                              <p class="link-form">Регистрация</p>
+                            </div>
+                            </div>  `;
+export const registrationForm = `<div class="registration-form addForm"">
+                            <div class="nameForm">
+                            Имя
+                            <input id="auth-name"
+                              type="text"
+                              class="authorizate-name"
+                              placeholder="Укажите имя"
+                              value=""
+                              />
+                            </div>
+                            <br/><br/>
+                            <div class="authorizate-form">
+                              <div class="loginForm">
+                                Логин
+                                <input id="auth-login"
+                                  type="text"
+                                  class="authorizate-login"
+                                  placeholder="Укажите логин"
+                                  value=""
+                                />
+                              </div>
+                              <br/><br/>
+                              <div class="passwordForm">
+                                Пароль
+                                <input id="auth-password"
+                                  type="password"
+                                  class="authorizate-password"
+                                  placeholder="Укажите пароль"
+                                  value=""
+                                />
+                              </div>
+                              <br/><br/>
+                              <div class="add-authorizate-form">
+                                <button id="auth-button" class="add-authorizate-button">Регистрация</button>
+                                <br/><br/>
+                                <p class="link-form">Войти</p>
+                              </div>
+                            </div>       
+                            </div> `;
 export function renderCommentsAndForms({ comments }) {
   const app = document.getElementById("app");
   const commentForm = ` <div class="add-form addForm">
@@ -67,82 +135,6 @@ export function renderCommentsAndForms({ comments }) {
     <span class="button-authorizate">авторизуйтесь</span> </p>`}
    </div>`
   app.innerHTML = commentsConteinerHtml;
-   function goToAuthorizationButtonClick() {
-    const app = document.getElementById("app");
-    const goToAuthorizationButton = document.querySelector(".button-authorizate")
-    goToAuthorizationButton.addEventListener('click', ({ token }) => {
-      if (token) {
-        console.log("hello");
-        app.innerHTML = `<div class="authorizate-form">
-                    <div class="loginForm">
-                      Логин
-                      <input id="auth-login"
-                        type="text"
-                        class="authorizate-login"
-                        placeholder="Укажите логин"
-                        value=""
-                      />
-                    </div>
-                    <br/><br/>
-                    <div class="passwordForm">
-                      Пароль
-                      <input id="auth-password"
-                        type="password"
-                        class="authorizate-password"
-                        placeholder="Укажите пароль"
-                        value=""
-                      />
-                    </div>
-                    <br/><br/>
-                    <div class="add-authorizate-form">
-                      <button id="auth-button" class="add-authorizate-button">Войти</button>
-                      <br/><br/>
-                      <p class="link-form">Регистрация</p>
-                    </div>
-                  </div>  `;
-      } else {
-        console.log("hi");
-        app.innerHTML = `<div class="registration-form addForm"">
-          <div class="nameForm">
-          Имя
-          <input id="auth-name"
-            type="text"
-            class="authorizate-name"
-            placeholder="Укажите имя"
-            value=""
-            />
-          </div>
-          <br/><br/>
-          <div class="authorizate-form">
-            <div class="loginForm">
-              Логин
-              <input id="auth-login"
-                type="text"
-                class="authorizate-login"
-                placeholder="Укажите логин"
-                value=""
-              />
-            </div>
-            <br/><br/>
-            <div class="passwordForm">
-              Пароль
-              <input id="auth-password"
-                type="password"
-                class="authorizate-password"
-                placeholder="Укажите пароль"
-                value=""
-              />
-            </div>
-            <br/><br/>
-            <div class="add-authorizate-form">
-              <button id="auth-button" class="add-authorizate-button">Регистрация</button>
-              <br/><br/>
-              <p class="link-form">Войти</p>
-            </div>
-          </div>       
-        </div> `;
-      }
-    });
-  }
+  
   goToAuthorizationButtonClick();
 }

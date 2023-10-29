@@ -14,10 +14,8 @@ const commentBoxElement = document.getElementById('comments');
 const startLoader = document.querySelector(".start-loader");
 const commentLoader = document.querySelector(".comment-loader");
 
-const authorizForm = document.querySelector('.authorizate-form');
 const goToAuthorizationButton = document.querySelector('.authoriz-button');
 const AuthorizMassage = document.querySelector('.choice-form');
-const registrationForm = document.querySelector('.registration-form');
 const registrationbutton = document.querySelector('.add-authorizate-button');
 
 let comments = [];
