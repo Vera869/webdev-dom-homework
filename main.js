@@ -23,15 +23,11 @@ const registrationForm = document.querySelector('.registration-form');
 const registrationbutton = document.querySelector('.add-authorizate-button');
 
 
-
-//startLoader.style.display = "flex";
-//addForm.style.display = "none";
-
 let comments = [];
 const getFetch = () => {
    getFitchTodos()
       .then((responseLoader) => {
-         // startLoader.style.display = "none";
+         //startLoader.style.display = "none";
          // AuthorizMassage.style.display = "flex";
          return responseLoader;
       }).then((responseData) => {
