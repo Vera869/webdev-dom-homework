@@ -22,22 +22,23 @@ let comments = [];
 const getFetch = () => {
    getFitchTodos()
       .then((responseLoader) => {
+         
          return responseLoader;
       }).then((responseData) => {
          renderCommentInGet({ responseData, comments, newDateElement, rendercomments });
+         const startLoader = document.querySelector(".start-loader");
+         startLoader.style.display = "none";
       }).catch((error) => {
          errorProcessingGet(error)
       });
 };
 getFetch();
-
+// startLoader.style.display = "none";
 const rendercomments = (appComments = []) => {
    renderCommentsAndForms({ comments: appComments, commentBoxElement });
    // getUserApi();
    // authorizationApi();
    // registrationApi();
-   // clickButtonsRegistration({authorizationForm, app });
-   // clickButtonsLogin({app, registrationForm});
    addLikeEventListeners();
    answerComment();
 }
@@ -67,11 +68,12 @@ function buttonPoctComment() {
       rendercomments();
    });
 }
-function addlike(index) {
+function addlike(index, comments) {
    const likebuttons = document.querySelectorAll('.like-button');
    const likebutton = likebuttons[index];
    const comment = comments[index];
-   islikedComment({ comment, islike, rendercomments });
+   console.log(comments, index);
+   islikedComment({ comment, rendercomments });
 }
 function addLikeEventListeners() {
    const likebuttons = document.querySelectorAll('.like-button');

@@ -128,7 +128,7 @@ export function renderCommentsAndForms({ comments }) {
                </li>`;
          }).join("");
          const commentsConteinerHtml = `<div class="container" id="comment-box">
-            <div class="start-loader">Пожалуйста, подождите - лента комментариев загружается...</div>
+            <div class="start-loader addForm">Пожалуйста, подождите - лента комментариев загружается...</div>
             <ul id="comments" class="comments">
                ${commentsHtml}
             </ul>
@@ -138,8 +138,6 @@ export function renderCommentsAndForms({ comments }) {
          app.innerHTML = commentsConteinerHtml;
       
          clickButtonsAuthorisation({commentForm, registrationForm, token, app});
-         clickButtonsRegistration({authorizationForm, app });
-         clickButtonsLogin({app, registrationForm});
 }
 // export function renderLoginComponent({app, token, registrationForm, renderCommentsAndForms }) {
 // let isLoginMode = true;

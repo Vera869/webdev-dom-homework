@@ -1,3 +1,4 @@
+import { registrationForm, authorizationForm } from "./renderTodos.js"
 
 export function newDateElement(date) {
   
@@ -11,28 +12,28 @@ export function newDateElement(date) {
    let fullDate =`${day}.${month}.${year}  ${hours}:${minutes}`;
    return fullDate;
  }
- export function clickButtonsAuthorisation({commentForm, registrationForm, token, app}) {
+ export function clickButtonsAuthorisation({commentForm, token, app}) {
    const buttonAuthorisation = document.querySelector(".button-authorizate");
    buttonAuthorisation.addEventListener('click', ({ token}) => {
       if (token) {
-        console.log("hello");
         app.innerHTML = commentForm;
       } else {
-        console.log("hi");
         app.innerHTML = registrationForm;
+        clickButtonsRegistration({ app });
       }
     });
  }
- export function clickButtonsRegistration({authorizationForm, app }) {
+ export function clickButtonsRegistration({ app }) {
    document.querySelector("#log").addEventListener('click', () => {
-      console.log("regauthorizz");
       app.innerHTML = authorizationForm;
+      clickButtonsLogin({app});
       }
    );
  }
- export function clickButtonsLogin({app, registrationForm}) {
+ export function clickButtonsLogin({app}) {
    document.querySelector("#reg").addEventListener('click', () => {
       app.innerHTML = registrationForm;
+      clickButtonsRegistration({ app });
       }
     );
  }

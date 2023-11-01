@@ -1,4 +1,4 @@
-export function islikedComment({comment, islike, rendercomments}) {
+export function islikedComment({comment, rendercomments}) {
   if(!comment.isLike) {
    comment.countLike += 1;
    comment.isLike = true; 
