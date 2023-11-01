@@ -37,6 +37,25 @@ export function newDateElement(date) {
       }
     );
  }
+ //document.getElementById("auth-button").addEventListener('click', () => {
+   //       const login = document.getElementById("auth-login").value;
+   //       const password = document.getElementById("auth-password").value;
+   //       if(!login) {
+   //          alert("Укажите логин");
+   //          return;
+   //       }
+   //       if(!password) {
+   //          alert("Укажите пароль");
+   //          return;
+   //       }
+   //       loginUser({
+   //          login: login,
+   //          password: password,
+   //       })
+   //    });
+   //   }
+
+
 //  export function clickButtonsRegistrationForm() {
 //    document.querySelector(".add-registrate-button").addEventListener('click', () => {
       

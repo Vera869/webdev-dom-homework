@@ -139,49 +139,6 @@ export function renderCommentsAndForms({ comments }) {
       
          clickButtonsAuthorisation({commentForm, registrationForm, token, app});
 }
-// export function renderLoginComponent({app, token, registrationForm, renderCommentsAndForms }) {
-// let isLoginMode = true;
-// const appHtml =  `<div class="registration-form addForm"">
-//             <div class="nameForm">
-//             ${isLoginMode ? "" : ` Имя
-//             <input id="auth-name"
-//             type="text"
-//             class="authorizate-name"
-//             placeholder="Укажите имя"
-//             value=""
-//             />
-//             </div>
-//             <br/><br/>`}
-           
-//             <div class="authorizate-form">
-//             <div class="loginForm">
-//                Логин
-//                <input id="auth-login"
-//                   type="text"
-//                   class="authorizate-login"
-//                   placeholder="Укажите логин"
-//                   value=""
-//                />
-//             </div>
-//             <br/><br/>
-//             <div class="passwordForm">
-//                Пароль
-//                <input id="auth-password"
-//                   type="password"
-//                   class="authorizate-password"
-//                   placeholder="Укажите пароль"
-//                   value=""
-//                />
-//             </div>
-//             <br/><br/>
-//             <div class="add-authorizate-form">
-//                <button id="auth-button" class="add-registrate-button">${isLoginMode ? "Войти" : "Регистрация"}</button>
-//                <br/><br/>
-//                <p class="toggle-button">${isLoginMode ? "Регистрация" : "Войти"}</p>
-//             </div>
-//             </div>       
-//             </div> `;
-//    app.innerHTML = appHtml;
 //    document.getElementById("auth-button").addEventListener('click', () => {
 //       const login = document.getElementById("auth-login").value;
 //       const password = document.getElementById("auth-password").value;
