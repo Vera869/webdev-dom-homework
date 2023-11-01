@@ -1,8 +1,8 @@
 import { getFitchTodos, postFetchTodo, getUserApi,  authorizationApi } from "./modules/fetchTodos.js"
-import { renderCommentsAndForms, renderCommentInGet } from "./modules/renderTodos.js"
+import { renderCommentsAndForms, renderCommentInGet, authorizationForm, registrationForm  } from "./modules/renderTodos.js"
 import { errorProcessingGet, errorProcessingPost } from "./modules/check.js"
 import { islikedComment, likeClick, renderAnswer } from "./modules/likesAndAnswer.js"
-import { newDateElement } from "./modules/other.js"
+import { newDateElement, clickButtonsRegistration, clickButtonsLogin } from "./modules/other.js"
 
 const formNameElement = document.getElementById('form-name');
 const formTextElement = document.getElementById('form-text');
@@ -36,11 +36,17 @@ const rendercomments = (appComments = []) => {
    // getUserApi();
    // authorizationApi();
    // registrationApi();
+   // clickButtonsRegistration({authorizationForm, app });
+   // clickButtonsLogin({app, registrationForm});
    addLikeEventListeners();
    answerComment();
 }
 rendercomments();
-buttonPoctComment()
+clickButtonsRegistration({authorizationForm, app });
+clickButtonsLogin({app, registrationForm});
+
+buttonPoctComment();
+
 const postFetch = () => {
    postFetchTodo({ formNameElement, formTextElement })
       .then((responseData) => {

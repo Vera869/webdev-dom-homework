@@ -11,3 +11,40 @@ export function newDateElement(date) {
    let fullDate =`${day}.${month}.${year}  ${hours}:${minutes}`;
    return fullDate;
  }
+ export function clickButtonsAuthorisation({commentForm, registrationForm, token, app}) {
+   const buttonAuthorisation = document.querySelector(".button-authorizate");
+   buttonAuthorisation.addEventListener('click', ({ token}) => {
+      if (token) {
+        console.log("hello");
+        app.innerHTML = commentForm;
+      } else {
+        console.log("hi");
+        app.innerHTML = registrationForm;
+      }
+    });
+ }
+ export function clickButtonsRegistration({authorizationForm, app }) {
+   document.querySelector(".link-form entrance").addEventListener('click', () => {
+      console.log("regauthorizz");
+      app.innerHTML = authorizationForm;
+      }
+   );
+ }
+ export function clickButtonsLogin({app, registrationForm}) {
+   document.querySelector(".regist").addEventListener('click', () => {
+      app.innerHTML = registrationForm;
+      }
+    );
+ }
+//  export function clickButtonsRegistrationForm() {
+//    document.querySelector(".add-registrate-button").addEventListener('click', () => {
+      
+//       }
+//     );
+//  }
+//export function clickButtonsAuthorisationForm() {
+   //    document.querySelector(".add-authorizate-button").addEventListener('click', () => {
+         
+   //       }
+   //     );
+   //  }

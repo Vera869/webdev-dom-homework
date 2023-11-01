@@ -1,4 +1,5 @@
 import { token } from "./fetchTodos.js"
+import {clickButtonsRegistration, clickButtonsAuthorisation } from "./other.js"
 
 export function renderCommentInGet({ responseData, comments, newDateElement, rendercomments }) {
   const appComments =
@@ -15,7 +16,7 @@ export function renderCommentInGet({ responseData, comments, newDateElement, ren
   rendercomments(appComments)
 }
 
-export const authorizationForm = `<div class="authorizate-form">
+export const authorizationForm = `<div class="authorizate-form addForm">
                             <div class="loginForm">
                               Логин
                               <input id="auth-login"
@@ -39,7 +40,7 @@ export const authorizationForm = `<div class="authorizate-form">
                             <div class="add-authorizate-form">
                               <button id="auth-button" class="add-authorizate-button">Войти</button>
                               <br/><br/>
-                             <!-- <p class="link-form regist">Регистрация</p>-->
+                             <p class="link-form regist">Регистрация</p>
                             </div>
                             </div>  `;
 export const registrationForm = `<div class="registration-form addForm"">
@@ -75,12 +76,13 @@ export const registrationForm = `<div class="registration-form addForm"">
                               </div>
                               <br/><br/>
                               <div class="add-authorizate-form">
-                                <button id="auth-button" class="add-authorizate-button">Регистрация</button>
+                                <button id="auth-button" class="add-registrate-button">Регистрация</button>
                                 <br/><br/>
-                                <!-- <p class="link-form entrance">Войти</p>-->
+                                <p class="link-form entrance">Войти</p>
                               </div>
                             </div>       
                             </div> `;
+
 export function renderCommentsAndForms({ comments }) {
   const app = document.getElementById("app");
   const commentForm = ` <div class="add-form addForm">
@@ -130,27 +132,9 @@ export function renderCommentsAndForms({ comments }) {
     <ul id="comments" class="comments">
       ${commentsHtml}
    </ul>
-    ${token ? commentForm : `<p class="choice-form addForm messages-form "> Чтобы добавить коментарий
+    ${token ? authorizationForm : `<p class="choice-form addForm messages-form "> Чтобы добавить коментарий
     <span class="button-authorizate">авторизуйтесь</span> </p>`}
    </div>`
   app.innerHTML = commentsConteinerHtml;
-    document.querySelector(".button-authorizate").addEventListener('click', ({ token}) => {
-      if (token) {
-        console.log("hello");
-        app.innerHTML = authorizationForm;
-      } else {
-        console.log("hi");
-        app.innerHTML = registrationForm;
-      }
-    });
-    document.querySelector(".add-authorizate-button").addEventListener('click', () => {
-      console.log("reg");
-      app.innerHTML = authorizationForm;
-      }
-    );
-    // document.querySelector(".regist").addEventListener('click', (event) => {
-    //   event.stopPropagation();  
-    //   app.innerHTML = registrationForm;
-    //   }
-    // );
+  clickButtonsAuthorisation({commentForm, registrationForm, token, app});
   }
