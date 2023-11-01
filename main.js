@@ -15,6 +15,13 @@ function newDateElement(date) {
   let fullDate =`${day}.${month}.${year}  ${hours}:${minutes}`;
   return fullDate;
 }
+const host = "https://wedev-api.sky.pro/api/v2/vera-Bu/comments";
+//let token = "Bearer bgc0b8awbwas6g5g5k5o5s5w606g37w3cc3bo3b83k39s3co3c83c03ck";
+
+export let token = '';
+export const setToken = (newToken) => {
+   token = newToken;
+}
 
 const commentBoxElement = document.getElementById('comments');
 
@@ -22,12 +29,15 @@ const startLoader = document.querySelector(".start-loader");
 const commentLoader = document.querySelector(".comment-loader");
 
 let comments = [];
-startLoader.style.display = "flex";
-commentLoader.style.display = "none";
+// startLoader.style.display = "flex";
+// commentLoader.style.display = "none";
 const getFetch = () => {
-  return fetch("https://wedev-api.sky.pro/api/v1/vera-Buganova/comments", {
+  return fetch(host, {
 
-    method: "GET"
+    method: "GET",
+    headers: {
+               Authorization: token,
+   },
   }).then((response) => {
     if(response.status === 500) {
       throw new Error("Сервер сломался");
@@ -67,37 +77,70 @@ const getFetch = () => {
 getFetch();
 
 const rendercomments = () => {
-  const commentsHtml = comments.map((comment) => {
-      return  ` <li class="comment">
-         <div class="comment-header">
-           <div class="name space" >
-             ${comment.name}
-           </div>
-           <div class="date">
-             ${comment.date}
-             </div>
-         </div>
-         <div class="comment-body">
-           <div class="comment-text space">
-             ${comment.text}
-           </div>
-         </div>
-         <div class="comment-footer">
-           <div class="likes">
-             <span data-index="{index}" class="likes-counter">${comment.countLike}</span>
-             <button data-index="{index}" class="like-button ${comment.isLike ? '-active-like' : ''}"></button>
-           </div>
-         </div>
-       </li>`;
-  }).join("");
-    
-  commentBoxElement.innerHTML = commentsHtml;
-  addLikeEventListeners();
-  answerComment()
-}
+   function renderCommentsAndForm() {
+      const app = document.getElementById("app");
+      const commentForm = ` <div class="add-form addForm">
+            <input id="form-name"
+            type="text"
+            class="add-form-name"
+            placeholder="Введите ваше имя"
+            value=""
+            />
+            <textarea id="form-text"
+            value=""
+            aria-valuetext=""
+            type="textarea"
+            class="add-form-text"
+            placeholder="Введите ваш коментарий"
+            rows="4"
+            ></textarea>
+            <div class="add-form-row">
+            <button id="add-button" class="add-form-button">Написать</button>
+            </div>
+         </div>`
+      const commentsHtml = comments.map((comment) => {
+         return  ` <li class="comment">
+            <div class="comment-header">
+              <div class="name space" >
+                ${comment.name}
+              </div>
+              <div class="date">
+                ${comment.date}
+                </div>
+            </div>
+            <div class="comment-body">
+              <div class="comment-text space">
+                ${comment.text}
+              </div>
+            </div>
+            <div class="comment-footer">
+              <div class="likes">
+                <span data-index="{index}" class="likes-counter">${comment.countLike}</span>
+                <button data-index="{index}" class="like-button ${comment.isLike ? '-active-like' : ''}"></button>
+              </div>
+            </div>
+          </li>`;
+     }).join("");
+     const commentsConteinerHtml = `<div class="container" id="comment-box">
+        <div class="start-loader">Пожалуйста, подождите - лента комментариев загружается...</div>
+         <ul id="comments" class="comments">
+           ${commentsHtml}
+        </ul>
+         ${token ? commentForm : `<p class="choice-form addForm messages-form "> Чтобы добавить коментарий
+         <span class="button-authorizate">авторизуйтесь</span> </p>`}
+        </div>`
+       app.innerHTML = commentsConteinerHtml;
+       
+   //   commentBoxElement.innerHTML = commentsHtml;
+     addLikeEventListeners();
+     answerComment()
+   }
+   renderCommentsAndForm();
+   }
+  
 rendercomments();
 
-const postFetch = () => fetch("https://wedev-api.sky.pro/api/v1/vera-Buganova/comments", {
+const postFetch = () => fetch(host, {
   method: "POST",
   body: JSON.stringify({
       name: formNameElement.value
@@ -111,7 +154,10 @@ const postFetch = () => fetch("https://wedev-api.sky.pro/api/v1/vera-Buganova/co
       .replaceAll(">", "&gt;")
       .replaceAll('"', "&quot;"),
       forceError: true,
-    })
+    }),
+  headers: {
+      Authorization: token,
+  },
   }).then((response) => {
     if(response.status === 500) {
       throw new Error("Сервер сломался");
