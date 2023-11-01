@@ -24,14 +24,14 @@ export function newDateElement(date) {
     });
  }
  export function clickButtonsRegistration({authorizationForm, app }) {
-   document.querySelector(".toggle-button").addEventListener('click', () => {
+   document.querySelector("#log").addEventListener('click', () => {
       console.log("regauthorizz");
       app.innerHTML = authorizationForm;
       }
    );
  }
  export function clickButtonsLogin({app, registrationForm}) {
-   document.querySelector(".regist").addEventListener('click', () => {
+   document.querySelector("#reg").addEventListener('click', () => {
       app.innerHTML = registrationForm;
       }
     );

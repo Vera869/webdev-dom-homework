@@ -1,5 +1,5 @@
 import { token } from "./fetchTodos.js"
-import {clickButtonsRegistration, clickButtonsAuthorisation } from "./other.js"
+import {clickButtonsRegistration, clickButtonsAuthorisation, clickButtonsLogin } from "./other.js"
 
 export function renderCommentInGet({ responseData, comments, newDateElement, rendercomments }) {
   const appComments =
@@ -40,7 +40,7 @@ export const authorizationForm = `<div class="authorizate-form addForm">
                             <div class="add-authorizate-form">
                               <button id="auth-button" class="add-authorizate-button">Войти</button>
                               <br/><br/>
-                             <p class="toggle-button">Регистрация</p>
+                             <p id="reg"class="toggle-button">Регистрация</p>
                             </div>
                             </div>  `;
 export let registrationForm = `<div class="registration-form addForm"">
@@ -78,7 +78,7 @@ export let registrationForm = `<div class="registration-form addForm"">
                               <div class="add-authorizate-form">
                                 <button id="auth-button" class="add-registrate-button">Регистрация</button>
                                 <br/><br/>
-                                <p class="toggle-button">Войти</p>
+                                <p id="log" class="toggle-button">Войти</p>
                               </div>
                             </div>       
                             </div> `;
@@ -132,11 +132,14 @@ export function renderCommentsAndForms({ comments }) {
             <ul id="comments" class="comments">
                ${commentsHtml}
             </ul>
-            ${token ? authorizationForm : `<p class="choice-form addForm messages-form "> Чтобы добавить коментарий
+            ${token ? commentForm : `<p class="choice-form addForm messages-form "> Чтобы добавить коментарий
             <span class="button-authorizate">авторизуйтесь</span> </p>`}
             </div>`
          app.innerHTML = commentsConteinerHtml;
+      
          clickButtonsAuthorisation({commentForm, registrationForm, token, app});
+         clickButtonsRegistration({authorizationForm, app });
+         clickButtonsLogin({app, registrationForm});
 }
 // export function renderLoginComponent({app, token, registrationForm, renderCommentsAndForms }) {
 // let isLoginMode = true;
