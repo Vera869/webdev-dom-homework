@@ -76,7 +76,7 @@ export let registrationForm = `<div class="registration-form addForm"">
                               </div>
                               <br/><br/>
                               <div class="add-authorizate-form">
-                                <button id="auth-button" class="add-registrate-button">Регистрация</button>
+                                <button id="reg-button" class="add-registrate-button">Регистрация</button>
                                 <br/><br/>
                                 <p id="log" class="toggle-button">Войти</p>
                               </div>

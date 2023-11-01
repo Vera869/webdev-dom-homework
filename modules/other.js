@@ -27,6 +27,7 @@ export function newDateElement(date) {
    document.querySelector("#log").addEventListener('click', () => {
       app.innerHTML = authorizationForm;
       clickButtonsLogin({app});
+      loginButtonClick();
       }
    );
  }
@@ -37,23 +38,49 @@ export function newDateElement(date) {
       }
     );
  }
- //document.getElementById("auth-button").addEventListener('click', () => {
-   //       const login = document.getElementById("auth-login").value;
-   //       const password = document.getElementById("auth-password").value;
-   //       if(!login) {
-   //          alert("Укажите логин");
-   //          return;
-   //       }
-   //       if(!password) {
-   //          alert("Укажите пароль");
-   //          return;
-   //       }
-   //       loginUser({
-   //          login: login,
-   //          password: password,
-   //       })
-   //    });
-   //   }
+export function loginButtonClick() {
+   document.getElementById("auth-button").addEventListener('click', () => {
+      const login = document.getElementById("auth-login").value;
+      const password = document.getElementById("auth-password").value;
+      if(!login) {
+         alert("Укажите логин");
+         return;
+      }
+      if(!password) {
+         alert("Укажите пароль");
+         return;
+      }
+      loginUser({
+         login: login,
+         password: password,
+      })
+   });
+}
+export function registrateButtonClick() {
+   document.getElementById("reg-button").addEventListener('click', () => {
+      const name = document.getElementById("auth-name").value;
+      const login = document.getElementById("auth-login").value;
+      const password = document.getElementById("auth-password").value;
+      if(!name) {
+         alert("Укажите имя");
+         return;
+      }
+      if(!login) {
+         alert("Укажите логин");
+         return;
+      }
+      if(!password) {
+         alert("Укажите пароль");
+         return;
+      }
+      loginUser({
+         name: name,
+         login: login,
+         password: password,
+      })
+   });
+}
+     
 
 
 //  export function clickButtonsRegistrationForm() {
