@@ -24,7 +24,7 @@ export function newDateElement(date) {
     });
  }
  export function clickButtonsRegistration({authorizationForm, app }) {
-   document.querySelector(".link-form entrance").addEventListener('click', () => {
+   document.querySelector(".toggle-button").addEventListener('click', () => {
       console.log("regauthorizz");
       app.innerHTML = authorizationForm;
       }

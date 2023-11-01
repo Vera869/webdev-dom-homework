@@ -40,7 +40,7 @@ export const authorizationForm = `<div class="authorizate-form addForm">
                             <div class="add-authorizate-form">
                               <button id="auth-button" class="add-authorizate-button">Войти</button>
                               <br/><br/>
-                             <p class="link-form regist">Регистрация</p>
+                             <p class="toggle-button">Регистрация</p>
                             </div>
                             </div>  `;
 export let registrationForm = `<div class="registration-form addForm"">
@@ -78,7 +78,7 @@ export let registrationForm = `<div class="registration-form addForm"">
                               <div class="add-authorizate-form">
                                 <button id="auth-button" class="add-registrate-button">Регистрация</button>
                                 <br/><br/>
-                                <p class="link-form entrance">Войти</p>
+                                <p class="toggle-button">Войти</p>
                               </div>
                             </div>       
                             </div> `;
